@@ -10,12 +10,13 @@
 
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import Home from './components/screen/Home';
 
 const App = () => {
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<SafeAreaView style={styles.container}>
-			<Text>Quiz App</Text>
+			<Home />
 		</SafeAreaView>
 	);
 };
