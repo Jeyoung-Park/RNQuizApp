@@ -10,6 +10,12 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "4.4.1",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-import": "2.22.0",
+    "eslint-plugin-jsx-a11y": "6.3.1",
+    "eslint-plugin-react": "7.20.3",
+    "eslint-plugin-react-hooks": "4.0.8",
     "react": "17.0.1",
     "react-native": "0.64.1"
   },
