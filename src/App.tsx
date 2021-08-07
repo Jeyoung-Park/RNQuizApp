@@ -11,12 +11,17 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
 import Home from './components/screen/Home';
+import { NavigationContainer } from '@react-navigation/native';
+import MainStackNavigator from './components/navigation/MainStackNavigator';
+
 
 const App = () => {
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<SafeAreaView style={styles.container}>
-			<Home />
+			<NavigationContainer>
+				<MainStackNavigator />
+			</NavigationContainer>
 		</SafeAreaView>
 	);
 };
@@ -24,6 +29,7 @@ const App = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		backgroundColor:'#ffffff',
 	},
 });
 
