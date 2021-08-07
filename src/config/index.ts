@@ -16,3 +16,10 @@ const PLATFORM = Platform.select({
 
 const WINDOW_HEIGHT = Dimensions.get('window').height;
 const WINDOW_WIDTH = Dimensions.get('window').width;
+
+export default {
+    QUIZ_API_PATH, 
+    PLATFORM, 
+    WINDOW_HEIGHT, 
+    WINDOW_WIDTH,
+}

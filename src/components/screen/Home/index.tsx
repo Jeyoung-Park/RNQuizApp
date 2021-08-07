@@ -2,12 +2,11 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
 
 interface HomeProps {
-  route:any,
+  // route:any,
   navigation:any,
 }
 
 const Home = ({
-  route,
   navigation,
 }: HomeProps) => {
   return (
