@@ -1,0 +1,18 @@
+import { QUIZ_HOST } from '@env';
+import { Dimensions, Platform } from 'react-native';
+
+const config = {
+	quiz_api: {
+		host: QUIZ_HOST,
+	},
+};
+
+let QUIZ_API_PATH = config.quiz_api.host;
+
+const PLATFORM = Platform.select({
+	android: 'android',
+	ios: 'ios',
+});
+
+const WINDOW_HEIGHT = Dimensions.get('window').height;
+const WINDOW_WIDTH = Dimensions.get('window').width;
