@@ -1,4 +1,4 @@
-import { QUIZ_HOST } from 'react-native-dotenv';
+import { QUIZ_HOST } from '@env';
 import { Dimensions, Platform } from 'react-native';
 
 console.log('QUIZ_HOST in conifg, ', QUIZ_HOST);

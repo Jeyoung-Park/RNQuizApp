@@ -8,7 +8,19 @@ module.exports = {
   //   '@scenes': './src/scenes',
   //   '@utils': './src/utils',
   // },
-
+  plugins: [
+    [
+      'module:react-native-dotenv',
+      {
+        moduleName: '@env',
+        path: '.env',
+        // blacklist: null,
+        // whitelist: ['QUIZ_HOST'],
+        safe: false,
+        allowUndefined: true,
+      },
+    ],
+  ]
   // "plugins": [
   //   ["module:react-native-dotenv", {
   //     "moduleName": "@env",
@@ -22,9 +34,9 @@ module.exports = {
   //     "verbose": false
   //   }]
   // ]
-  "plugins": [
-    ["module:react-native-dotenv", {
-      "moduleName": "react-native-dotenv"
-    }]
-  ]
+  // "plugins": [
+  //   ["module:react-native-dotenv", {
+  //     "moduleName": "react-native-dotenv"
+  //   }]
+  // ]
 };
