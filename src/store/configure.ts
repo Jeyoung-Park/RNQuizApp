@@ -1,10 +1,6 @@
-import { createStore } from "redux"
+import { createStore } from 'redux';
 import reducer from '../models';
 
-const configure = () => {
-    return createStore(
-        reducer, 
-    )
-}
+const configure = () => createStore(reducer);
 
 export default configure;

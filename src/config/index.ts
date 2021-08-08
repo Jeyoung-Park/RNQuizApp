@@ -7,7 +7,7 @@ const config = {
 	},
 };
 
-let QUIZ_API_PATH = config.quiz_api.host;
+const QUIZ_API_PATH = config.quiz_api.host;
 
 const PLATFORM = Platform.select({
 	android: 'android',
@@ -18,8 +18,8 @@ const WINDOW_HEIGHT = Dimensions.get('window').height;
 const WINDOW_WIDTH = Dimensions.get('window').width;
 
 export default {
-    QUIZ_API_PATH, 
-    PLATFORM, 
-    WINDOW_HEIGHT, 
-    WINDOW_WIDTH,
-}
+	QUIZ_API_PATH,
+	PLATFORM,
+	WINDOW_HEIGHT,
+	WINDOW_WIDTH,
+};
