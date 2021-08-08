@@ -10,26 +10,31 @@
 
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
-import Home from './components/screen/Home';
+import { Provider } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
+// import Home from './components/screen/Home';
 import MainStackNavigator from './components/navigation/MainStackNavigator';
+import store from './store';
 
+const AppMain = () => (
+	// eslint-disable-next-line @typescript-eslint/no-use-before-define
+	<SafeAreaView style={styles.container}>
+		<NavigationContainer>
+			<MainStackNavigator />
+		</NavigationContainer>
+	</SafeAreaView>
+);
 
-const App = () => {
-	return (
-		// eslint-disable-next-line @typescript-eslint/no-use-before-define
-		<SafeAreaView style={styles.container}>
-			<NavigationContainer>
-				<MainStackNavigator />
-			</NavigationContainer>
-		</SafeAreaView>
-	);
-};
+const App = () => (
+	<Provider store={store}>
+		<AppMain />
+	</Provider>
+);
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor:'#ffffff',
+		backgroundColor: '#ffffff',
 	},
 });
 

@@ -1,5 +1,7 @@
-import { QUIZ_HOST } from '@env';
+import { QUIZ_HOST } from 'react-native-dotenv';
 import { Dimensions, Platform } from 'react-native';
+
+console.log('QUIZ_HOST in conifg, ', QUIZ_HOST);
 
 const config = {
 	quiz_api: {

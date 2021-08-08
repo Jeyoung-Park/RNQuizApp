@@ -2,6 +2,7 @@ import { handleActions } from 'redux-actions';
 import invokeAPI from '../restApi';
 import { createPromiseThunk } from './lib/asyncUtils';
 
+
 // 초기 상태
 export const initialState = {
 	// 퀴즈 목록
@@ -23,7 +24,8 @@ const GET_QUIZ_LIST_ERROR = 'quiz/GET_QUIZ_LIST_ERROR';
 // ******************************************************************************
 
 // 퀴즈 목록 가져오기
-export const getQuizList = createPromiseThunk(
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const getQuizList_action = createPromiseThunk(
 	GET_QUIZ_LIST,
 	invokeAPI({ method: 'get' }),
 );
@@ -31,12 +33,15 @@ export const getQuizList = createPromiseThunk(
 // *********************************** reducer ***********************************
 export default handleActions(
 	{
-		[GET_QUIZ_LIST]: (state, action) => state,
-		[GET_QUIZ_LIST_SUCCESS]: (state, { payload: result }) => ({
-			...state,
-			quizList: result,
-		}),
-		[GET_QUIZ_LIST_ERROR]: (state, action) => state,
+		[GET_QUIZ_LIST]: (state: any, action: any) => state,
+		[GET_QUIZ_LIST_SUCCESS]: (state: any, { payload: result }: any) => {
+			console.log('GET_QUIZ_LIST_SUCCESS, result, ', result);
+			return({
+				...state,
+				quizList: result,
+			});
+		},
+		[GET_QUIZ_LIST_ERROR]: (state: any, action: any) => state,
 	},
 	initialState,
 );

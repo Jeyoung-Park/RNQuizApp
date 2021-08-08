@@ -8,14 +8,23 @@ module.exports = {
   //   '@scenes': './src/scenes',
   //   '@utils': './src/utils',
   // },
-  plugins: [
+
+  // "plugins": [
+  //   ["module:react-native-dotenv", {
+  //     "moduleName": "@env",
+  //     "path": ".env",
+  //     "blocklist": null,
+  //     "allowlist": null,
+  //     // "blacklist": null, // DEPRECATED
+  //     // "whitelist": null, // DEPRECATED
+  //     "safe": false,
+  //     "allowUndefined": false,
+  //     "verbose": false
+  //   }]
+  // ]
+  "plugins": [
     ["module:react-native-dotenv", {
-      "moduleName": "@env",
-      "path": "./src/config/env",
-      "blacklist": null,
-      "whitelist": null,
-      "safe": false,
-      "allowUndefined": true
+      "moduleName": "react-native-dotenv"
     }]
   ]
 };
