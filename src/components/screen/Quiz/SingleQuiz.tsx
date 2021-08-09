@@ -22,20 +22,42 @@ const SingleQuiz = ({ currentIndex }: SingleQuizProps) => {
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
 
 	const [currentQuiz, setCurrentQuiz] = useState<Quiz>();
+	const [selections, setSelections] = useState<string[] | undefined>([]);
 
 	console.log('currentQuiz in SIngleQuiz, ', currentQuiz);
 
 	useEffect(() => {
-		setCurrentQuiz(quizList[currentIndex]);
+		setCurrentQuiz(quizList?.[currentIndex]);
 	}, [currentIndex, quizList]);
+
+	useEffect(() => {
+		const randomNum = Math.floor(Math.random() * 4);
+		console.log('randomNum, ', randomNum);
+		console.log('incorrect answers before, ', currentQuiz?.incorrect_answers);
+		const tempSelections = { ...currentQuiz }?.incorrect_answers;
+		// tempSelections = [];
+		tempSelections?.splice(randomNum, 0, currentQuiz?.correct_answer);
+		console.log(
+			'tempSelections, ',
+			tempSelections,
+			currentQuiz?.incorrect_answers,
+			currentQuiz?.correct_answer,
+		);
+		setSelections(tempSelections);
+	}, [currentQuiz]);
 
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<SafeAreaView style={styles.container}>
 			<Text>
-				Q{currentIndex+1}. {currentQuiz?.category}
+				Q{currentIndex + 1}. {currentQuiz?.category}
 			</Text>
 			<Text>{currentQuiz?.question}</Text>
+			{selections?.map((item, index) => (
+				<TouchableOpacity key={item + '' + index}>
+					<Text>{item}</Text>
+				</TouchableOpacity>
+			))}
 		</SafeAreaView>
 	);
 };
