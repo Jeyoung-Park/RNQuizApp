@@ -22,7 +22,7 @@ const Quiz = () => {
 
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
 
-	const [currentIndex, setCurrentIndex] = useState(0);
+	const [currentIndex, setCurrentIndex] = useState<number>(0);
 
 	console.log('quizList in Quiz index, ', quizList);
 
