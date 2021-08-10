@@ -17,11 +17,17 @@ import { number } from 'prop-types';
 
 interface SingleQuizProps {
 	currentIndex: number;
-	goToNext: () => void;
+	isSolved: boolean;
+	setIsSolved: (param: boolean) => void;
+	// goToNext: () => void;
 	// setCurrentIndex: (param: number) => void;
 }
 
-const SingleQuiz = ({ currentIndex, goToNext }: SingleQuizProps) => {
+const SingleQuiz = ({
+	currentIndex,
+	isSolved,
+	setIsSolved,
+}: SingleQuizProps) => {
 	console.log('currentIndex', currentIndex);
 
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
@@ -35,6 +41,7 @@ const SingleQuiz = ({ currentIndex, goToNext }: SingleQuizProps) => {
 
 	useEffect(() => {
 		setCurrentQuiz(quizList?.[currentIndex]);
+		setIsSolved(false);
 	}, [currentIndex, quizList]);
 
 	useEffect(() => {
@@ -64,7 +71,8 @@ const SingleQuiz = ({ currentIndex, goToNext }: SingleQuizProps) => {
 		} else {
 			SimpleToast.show('오답입니다.');
 		}
-		goToNext();
+		// goToNext();
+		setIsSolved(true);
 	}, [choice]);
 
 	return (
@@ -90,6 +98,7 @@ const SingleQuiz = ({ currentIndex, goToNext }: SingleQuizProps) => {
 							setChoice(item);
 						}}
 						style={styles.selectionButton}
+						disabled={isSolved}
 					>
 						<Text>{item}</Text>
 					</TouchableOpacity>

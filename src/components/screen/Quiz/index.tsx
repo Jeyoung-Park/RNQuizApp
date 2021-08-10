@@ -24,6 +24,7 @@ const Quiz = ({ navigation }: QuizProps) => {
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
 
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
+	const [isSolved, setIsSolved] = useState<boolean>(false);
 
 	console.log('quizList in Quiz index, ', quizList);
 
@@ -64,15 +65,18 @@ const Quiz = ({ navigation }: QuizProps) => {
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<SafeAreaView style={styles.container}>
 			<Header goBack={goBack} />
-			<SingleQuiz currentIndex={currentIndex} goToNext={goToNext} />
-			{/* <View style={styles.buttonsContainer}>
-				<TouchableOpacity onPress={onPressPrevious}>
-					<Text>Previous</Text>
-				</TouchableOpacity>
-				<TouchableOpacity onPress={onPressNext}>
-					<Text>Next</Text>
-				</TouchableOpacity>
-			</View> */}
+			<SingleQuiz
+				currentIndex={currentIndex}
+				isSolved={isSolved}
+				setIsSolved={(param) => setIsSolved(param)}
+			/>
+			<View style={styles.buttonsContainer}>
+				{isSolved && (
+					<TouchableOpacity onPress={goToNext}>
+						<Text>Next</Text>
+					</TouchableOpacity>
+				)}
+			</View>
 		</SafeAreaView>
 	);
 };
@@ -81,5 +85,10 @@ export default Quiz;
 
 const styles = StyleSheet.create({
 	container: { flex: 1, backgroundColor: 'white' },
-	buttonsContainer: { flexDirection: 'row', justifyContent: 'space-between' },
+	buttonsContainer: {
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+		alignItems: 'center',
+		height: 50,
+	},
 });
