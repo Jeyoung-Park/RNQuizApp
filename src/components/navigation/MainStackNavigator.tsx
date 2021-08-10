@@ -4,6 +4,7 @@ import * as React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../screen/Home';
 import Quiz from '../screen/Quiz';
+import Result from '../screen/Result';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,13 @@ const MainStackNavigator = () => (
 		<Stack.Screen
 			name="Quiz"
 			component={Quiz}
+			options={{
+				headerShown: false,
+			}}
+		/>
+		<Stack.Screen
+			name="Result"
+			component={Result}
 			options={{
 				headerShown: false,
 			}}
