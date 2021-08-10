@@ -14,10 +14,11 @@ import { Quiz } from '../../../interface';
 
 interface SingleQuizProps {
 	currentIndex: number;
+	goToNext: () => void;
 	// setCurrentIndex: (param: number) => void;
 }
 
-const SingleQuiz = ({ currentIndex }: SingleQuizProps) => {
+const SingleQuiz = ({ currentIndex, goToNext }: SingleQuizProps) => {
 	console.log('currentIndex', currentIndex);
 
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
@@ -58,6 +59,7 @@ const SingleQuiz = ({ currentIndex }: SingleQuizProps) => {
 		} else {
 			SimpleToast.show('오답입니다.');
 		}
+		goToNext();
 	}, [choice]);
 
 	return (

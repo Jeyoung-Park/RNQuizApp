@@ -26,15 +26,15 @@ const Quiz = () => {
 
 	console.log('quizList in Quiz index, ', quizList);
 
-	const onPressPrevious = () => {
-		if (currentIndex === 0) {
-			SimpleToast.show('첫 번째 문제입니다.');
-			return;
-		}
-		setCurrentIndex(currentIndex - 1);
-	};
+	// const onPressPrevious = () => {
+	// 	if (currentIndex === 0) {
+	// 		SimpleToast.show('첫 번째 문제입니다.');
+	// 		return;
+	// 	}
+	// 	setCurrentIndex(currentIndex - 1);
+	// };
 
-	const onPressNext = () => {
+	const goToNext = () => {
 		if (currentIndex === quizList?.length - 1) {
 			SimpleToast.show('마지막 문제입니다.');
 			return;
@@ -67,15 +67,15 @@ const Quiz = () => {
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<SafeAreaView style={styles.container}>
 			{/* <Text>Quiz</Text> */}
-			<SingleQuiz currentIndex={currentIndex} />
-			<View style={styles.buttonsContainer}>
+			<SingleQuiz currentIndex={currentIndex} goToNext={goToNext} />
+			{/* <View style={styles.buttonsContainer}>
 				<TouchableOpacity onPress={onPressPrevious}>
 					<Text>Previous</Text>
 				</TouchableOpacity>
 				<TouchableOpacity onPress={onPressNext}>
 					<Text>Next</Text>
 				</TouchableOpacity>
-			</View>
+			</View> */}
 		</SafeAreaView>
 	);
 };
