@@ -1,9 +1,10 @@
-import * as React from 'react';
-import { Text, View, StyleSheet, Dimensions } from 'react-native';
+import React, { useEffect } from 'react';
+import { Text, View, StyleSheet, BackHandler } from 'react-native';
 import { useSelector } from 'react-redux';
 import { PieChart } from 'react-native-chart-kit';
 import config from '../../../config';
 import Header from './Header';
+import { createTwoButtonAlert } from '../../../shared/Alert';
 
 interface ResultProps {
 	navigation: any;
@@ -50,10 +51,27 @@ const Result = ({ navigation }: ResultProps) => {
 	];
 
 	const goBack = () => {
-		navigation.navigate('Home');
+		createTwoButtonAlert({
+			message: '홈으로 돌아가시겠습니까?',
+			text_ok: '홈으로 돌아가기',
+			text_cancel: '취소',
+			function_ok: () => {
+				navigation.navigate('Home');
+			},
+		});
 	};
 
-	console.log('data in Result index, ', data);
+	useEffect(() => {
+		const backAction = () => {
+			goBack();
+			return true;
+		};
+		const backHandler = BackHandler.addEventListener(
+			'hardwareBackPress',
+			backAction,
+		);
+		return () => backHandler.remove();
+	}, []);
 
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
