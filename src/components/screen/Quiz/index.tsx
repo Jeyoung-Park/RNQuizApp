@@ -8,7 +8,10 @@ import {
 } from 'react-native';
 import SimpleToast from 'react-native-simple-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { getQuizList_action } from '../../../models/quiz';
+import {
+	getQuizListAction,
+	setQuizCorrectNumberAction,
+} from '../../../models/quiz';
 import Header from './Header';
 import SingleQuiz from './SingleQuiz';
 
@@ -23,6 +26,7 @@ const Quiz = ({ navigation }: QuizProps) => {
 
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
 	const [isSolved, setIsSolved] = useState<boolean>(false);
+	const [correctNumber, setCorrectNumber] = useState<number>(0);
 
 	console.log('quizList in Quiz index, ', quizList);
 
@@ -30,20 +34,10 @@ const Quiz = ({ navigation }: QuizProps) => {
 		navigation.goBack();
 	};
 
-	const goToNext = () => {
-		if (currentIndex === quizList?.length - 1) {
-			// SimpleToast.show('마지막 문제입니다.');
-			// setIsStart(false);
-			navigation.navigate('Result');
-			return;
-		}
-		setCurrentIndex(currentIndex + 1);
-	};
-
 	const getQuizList = async (numberOfQuiz: number = 10) => {
 		try {
 			const result = await dispatch(
-				getQuizList_action({
+				getQuizListAction({
 					subPath: `?amount=${numberOfQuiz}&type=multiple`,
 					params: null,
 					data: null,
@@ -54,6 +48,26 @@ const Quiz = ({ navigation }: QuizProps) => {
 			console.warn('error in getQuizList, ', e);
 			SimpleToast.show('퀴즈 목록을 불러오는 데 실패했습니다.');
 		}
+	};
+
+	const setNumberOfCorrect = (number: number) => {
+		try {
+			dispatch(setQuizCorrectNumberAction(number));
+		} catch (e) {
+			console.warn('error in setCorrectNumber,', e);
+			SimpleToast.show('맞힌 퀴즈 개수를 저장하는 데에 실패하였습니다.');
+		}
+	};
+
+	const goToNext = () => {
+		if (currentIndex === quizList?.length - 1) {
+			// SimpleToast.show('마지막 문제입니다.');
+			// setIsStart(false);
+			setNumberOfCorrect(correctNumber);
+			navigation.navigate('Result');
+			return;
+		}
+		setCurrentIndex(currentIndex + 1);
 	};
 
 	useEffect(() => {
@@ -69,6 +83,8 @@ const Quiz = ({ navigation }: QuizProps) => {
 				currentIndex={currentIndex}
 				isSolved={isSolved}
 				setIsSolved={(param) => setIsSolved(param)}
+				correctNumber={correctNumber}
+				setCorrectNumber={(param) => setCorrectNumber(param)}
 			/>
 			<View style={styles.buttonsContainer}>
 				{isSolved && (

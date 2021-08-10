@@ -20,6 +20,8 @@ interface SingleQuizProps {
 	currentIndex: number;
 	isSolved: boolean;
 	setIsSolved: (param: boolean) => void;
+	correctNumber: number;
+	setCorrectNumber: (param: number) => void;
 	// isStart: boolean;
 	// setIsStart: (param: boolean) => void;
 }
@@ -95,6 +97,8 @@ const SingleQuiz = ({
 	currentIndex,
 	isSolved,
 	setIsSolved,
+	correctNumber,
+	setCorrectNumber,
 }: // isStart,
 // setIsStart,
 SingleQuizProps) => {
@@ -105,7 +109,6 @@ SingleQuizProps) => {
 	const [currentQuiz, setCurrentQuiz] = useState<Quiz | undefined>();
 	const [selections, setSelections] = useState<string[] | undefined>([]);
 	const [choice, setChoice] = useState<string | null>(null);
-	const [correctNumber, setCorrectNumber] = useState<number>(0);
 
 	console.log('currentQuiz in SIngleQuiz, ', currentQuiz);
 
