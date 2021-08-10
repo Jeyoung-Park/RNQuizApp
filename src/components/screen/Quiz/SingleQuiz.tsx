@@ -36,7 +36,9 @@ const SingleQuiz = ({ currentIndex }: SingleQuizProps) => {
 		const randomNum = Math.floor(Math.random() * 4);
 		console.log('randomNum, ', randomNum);
 		console.log('incorrect answers before, ', currentQuiz?.incorrect_answers);
-		const tempSelections = { ...currentQuiz }?.incorrect_answers;
+		const tempSelections = currentQuiz?.incorrect_answers
+			? [...currentQuiz?.incorrect_answers]
+			: null;
 		// tempSelections = [];
 		tempSelections?.splice(randomNum, 0, currentQuiz?.correct_answer);
 		console.log(
