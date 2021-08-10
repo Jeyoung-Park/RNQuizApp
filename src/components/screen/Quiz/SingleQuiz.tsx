@@ -13,20 +13,22 @@ import SimpleToast from 'react-native-simple-toast';
 import { useSelector } from 'react-redux';
 import { Quiz } from '../../../interface';
 import config from '../../../config';
+import Timer from './Timer';
 // import { number } from 'prop-types';
 
 interface SingleQuizProps {
 	currentIndex: number;
 	isSolved: boolean;
 	setIsSolved: (param: boolean) => void;
-	// goToNext: () => void;
-	// setCurrentIndex: (param: number) => void;
+	// isStart: boolean;
+	// setIsStart: (param: boolean) => void;
 }
 
 interface QuizNumberProps {
 	currentIndex: number;
 	correctNumber: number;
 	quizList: Quiz[];
+	isStart: boolean;
 }
 
 interface QuizCategoryProps {
@@ -44,14 +46,18 @@ interface QuizSelectionsProps {
 }
 
 const QuizNumber = React.memo(
-	({ currentIndex, correctNumber, quizList }: QuizNumberProps) => (
-		<View style={styles.quizNumbersContainer}>
-			<Text>Q{currentIndex + 1}</Text>
-			<Text>
-				{correctNumber}/{quizList?.length}
-			</Text>
-		</View>
-	),
+	({ currentIndex, correctNumber, quizList, isStart }: QuizNumberProps) => {
+		console.log('isStart in QuizNumber, ', isStart);
+		return (
+			<View style={styles.quizNumbersContainer}>
+				<Text>Q{currentIndex + 1}</Text>
+				<Timer isStart={isStart} />
+				<Text>
+					{correctNumber}/{quizList?.length}
+				</Text>
+			</View>
+		);
+	},
 );
 
 const QuizCategory = React.memo(({ currentQuiz }: QuizCategoryProps) => (
@@ -89,7 +95,9 @@ const SingleQuiz = ({
 	currentIndex,
 	isSolved,
 	setIsSolved,
-}: SingleQuizProps) => {
+}: // isStart,
+// setIsStart,
+SingleQuizProps) => {
 	console.log('currentIndex', currentIndex);
 
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
@@ -144,6 +152,7 @@ const SingleQuiz = ({
 				currentIndex={currentIndex}
 				correctNumber={correctNumber}
 				quizList={quizList}
+				isStart={!(currentIndex === quizList?.length - 1 && isSolved)}
 			/>
 			<QuizCategory currentQuiz={currentQuiz} />
 			<QuizQuestion currentQuiz={currentQuiz} />

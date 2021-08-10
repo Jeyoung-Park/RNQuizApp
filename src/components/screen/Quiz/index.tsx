@@ -1,6 +1,4 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Text,
 	View,
@@ -25,6 +23,7 @@ const Quiz = ({ navigation }: QuizProps) => {
 
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
 	const [isSolved, setIsSolved] = useState<boolean>(false);
+	const [isStart, setIsStart] = useState<boolean>(true);
 
 	console.log('quizList in Quiz index, ', quizList);
 
@@ -35,6 +34,7 @@ const Quiz = ({ navigation }: QuizProps) => {
 	const goToNext = () => {
 		if (currentIndex === quizList?.length - 1) {
 			SimpleToast.show('마지막 문제입니다.');
+			// setIsStart(false);
 			return;
 		}
 		setCurrentIndex(currentIndex + 1);
