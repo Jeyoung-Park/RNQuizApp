@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Dimensions } from 'react-native';
 import { useSelector } from 'react-redux';
 import { PieChart } from 'react-native-chart-kit';
 import config from '../../../config';
+import Header from './Header';
 
 interface ResultProps {
 	navigation: any;
@@ -48,12 +49,16 @@ const Result = ({ navigation }: ResultProps) => {
 		},
 	];
 
+	const goBack = () => {
+		navigation.navigate('Home');
+	};
+
 	console.log('data in Result index, ', data);
 
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<View style={styles.container}>
-			<Text>Result</Text>
+			<Header goBack={goBack} />
 			<PieChart
 				data={data}
 				width={config.WINDOW_WIDTH}
@@ -67,10 +72,17 @@ const Result = ({ navigation }: ResultProps) => {
 				chartConfig={chartConfig}
 				style={styles.pieChart}
 			/>
-			<Text>전체 문제: {quizList?.length}</Text>
-			<Text>정답 개수: {correctNumber}</Text>
-			<Text>오답 개수: {quizList?.length - correctNumber}</Text>
-			<Text>소요 시간: {quizTime} </Text>
+			<View
+				style={{
+					flex: 1,
+					// backgroundColor: 'pink',
+				}}
+			>
+				<Text>전체 문제: {quizList?.length}</Text>
+				<Text>정답 개수: {correctNumber}</Text>
+				<Text>오답 개수: {quizList?.length - correctNumber}</Text>
+				<Text>소요 시간: {quizTime} </Text>
+			</View>
 		</View>
 	);
 };
@@ -78,10 +90,15 @@ const Result = ({ navigation }: ResultProps) => {
 export default Result;
 
 const styles = StyleSheet.create({
-	container: {},
+	container: { flex: 1, backgroundColor: 'white' },
 	pieChart: {
+		flex: 1,
 		marginVertical: 8,
 		borderRadius: 16,
+
 		// backgroundColor: 'purple',
+
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 });
