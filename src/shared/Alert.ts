@@ -1,7 +1,7 @@
 import { Alert } from 'react-native';
 
 interface OneButtonAlertProps {
-	title: string;
+	title?: string;
 	message: string;
 	function_ok: () => void;
 }
@@ -9,11 +9,11 @@ interface OneButtonAlertProps {
 interface TwoButtonAlertProps extends OneButtonAlertProps {
 	text_cancel: string;
 	text_ok: string;
-	function_cancel: () => void;
+	function_cancel?: () => void;
 }
 
 export const createOneButtonAlert = ({
-	title,
+	title = '',
 	message,
 	function_ok,
 }: OneButtonAlertProps) => {
@@ -28,7 +28,7 @@ export const createOneButtonAlert = ({
 };
 
 export const createTwoButtonAlert = ({
-	title,
+	title = '',
 	message,
 	text_cancel,
 	text_ok,
@@ -39,7 +39,7 @@ export const createTwoButtonAlert = ({
 		{
 			text: text_cancel,
 			onPress: () => {
-				function_cancel();
+				if (function_cancel) function_cancel();
 			},
 			style: 'cancel',
 		},

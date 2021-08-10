@@ -5,6 +5,7 @@ import {
 	StyleSheet,
 	SafeAreaView,
 	TouchableOpacity,
+	BackHandler,
 } from 'react-native';
 import SimpleToast from 'react-native-simple-toast';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,6 +13,7 @@ import {
 	getQuizListAction,
 	setQuizCorrectNumberAction,
 } from '../../../models/quiz';
+import { createTwoButtonAlert } from '../../../shared/Alert';
 import Header from './Header';
 import SingleQuiz from './SingleQuiz';
 
@@ -31,7 +33,15 @@ const Quiz = ({ navigation }: QuizProps) => {
 	console.log('quizList in Quiz index, ', quizList);
 
 	const goBack = () => {
-		navigation.goBack();
+		createTwoButtonAlert({
+			message:
+				'퀴즈를 푸는 도중에 나가시면 내용이 저장되지 않습니다.\n나가시겠습니까?',
+			text_ok: '나가기',
+			text_cancel: '취소',
+			function_ok: () => {
+				navigation.goBack();
+			},
+		});
 	};
 
 	const getQuizList = async (numberOfQuiz: number = 10) => {
@@ -72,6 +82,15 @@ const Quiz = ({ navigation }: QuizProps) => {
 
 	useEffect(() => {
 		getQuizList(2);
+		const backAction = () => {
+			goBack();
+			return true;
+		};
+		const backHandler = BackHandler.addEventListener(
+			'hardwareBackPress',
+			backAction,
+		);
+		return () => backHandler.remove();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
