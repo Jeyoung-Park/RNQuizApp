@@ -10,7 +10,7 @@ import {
 import SimpleToast from 'react-native-simple-toast';
 import { useSelector } from 'react-redux';
 import { Quiz } from '../../../interface';
-// import { Quiz } from '../../../interface';
+import config from '../../../config';
 
 interface SingleQuizProps {
 	currentIndex: number;
@@ -65,20 +65,27 @@ const SingleQuiz = ({ currentIndex, goToNext }: SingleQuizProps) => {
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<SafeAreaView style={styles.container}>
-			<Text>
-				Q{currentIndex + 1}. {currentQuiz?.category}
-			</Text>
-			<Text>{currentQuiz?.question}</Text>
-			{selections?.map((item, index) => (
-				<TouchableOpacity
-					key={item + '' + index}
-					onPress={() => {
-						setChoice(item);
-					}}
-				>
-					<Text>{item}</Text>
-				</TouchableOpacity>
-			))}
+			<View style={styles.contentContainer}>
+				<Text>
+					Q{currentIndex + 1}. {currentQuiz?.category}
+				</Text>
+			</View>
+			<View style={styles.contentContainer}>
+				<Text>{currentQuiz?.question}</Text>
+			</View>
+			<View style={{ ...styles.contentContainer, flex: 2 }}>
+				{selections?.map((item, index) => (
+					<TouchableOpacity
+						key={`${item}-${index}`}
+						onPress={() => {
+							setChoice(item);
+						}}
+						style={styles.selectionButton}
+					>
+						<Text>{item}</Text>
+					</TouchableOpacity>
+				))}
+			</View>
 		</SafeAreaView>
 	);
 };
@@ -90,7 +97,27 @@ const styles = StyleSheet.create({
 		flex: 1,
 
 		// flexDirection: 'row',
+		// justifyContent: 'center',
+		alignItems: 'center',
+		paddingHorizontal: 16,
+	},
+	contentContainer: {
+		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
+		// backgroundColor:'red'
+	},
+	selectionButton: {
+		// flex:1,
+		width: config.WINDOW_WIDTH - 32,
+		paddingVertical: 20,
+		backgroundColor: 'gray',
+
+		justifyContent: 'center',
+		alignItems: 'center',
+
+		marginBottom: 10,
+
+		borderRadius: 10,
 	},
 });
