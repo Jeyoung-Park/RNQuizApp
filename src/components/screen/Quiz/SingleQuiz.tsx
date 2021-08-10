@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import {
@@ -11,6 +13,7 @@ import SimpleToast from 'react-native-simple-toast';
 import { useSelector } from 'react-redux';
 import { Quiz } from '../../../interface';
 import config from '../../../config';
+import { number } from 'prop-types';
 
 interface SingleQuizProps {
 	currentIndex: number;
@@ -26,6 +29,7 @@ const SingleQuiz = ({ currentIndex, goToNext }: SingleQuizProps) => {
 	const [currentQuiz, setCurrentQuiz] = useState<Quiz>();
 	const [selections, setSelections] = useState<string[] | undefined>([]);
 	const [choice, setChoice] = useState<string | null>(null);
+	const [correctNumber, setCorrectNumber] = useState<number>(0);
 
 	console.log('currentQuiz in SIngleQuiz, ', currentQuiz);
 
@@ -56,6 +60,7 @@ const SingleQuiz = ({ currentIndex, goToNext }: SingleQuizProps) => {
 
 		if (choice === currentQuiz?.correct_answer) {
 			SimpleToast.show('정답입니다.');
+			setCorrectNumber(correctNumber + 1);
 		} else {
 			SimpleToast.show('오답입니다.');
 		}
@@ -65,15 +70,19 @@ const SingleQuiz = ({ currentIndex, goToNext }: SingleQuizProps) => {
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<SafeAreaView style={styles.container}>
-			<View style={styles.contentContainer}>
+			<View style={styles.quizNumbersContainer}>
+				<Text>Q{currentIndex + 1}</Text>
 				<Text>
-					Q{currentIndex + 1}. {currentQuiz?.category}
+					{correctNumber}/{quizList?.length}
 				</Text>
 			</View>
 			<View style={styles.contentContainer}>
-				<Text>{currentQuiz?.question}</Text>
+				<Text>{currentQuiz?.category}</Text>
 			</View>
 			<View style={{ ...styles.contentContainer, flex: 2 }}>
+				<Text>{currentQuiz?.question}</Text>
+			</View>
+			<View style={{ ...styles.contentContainer, flex: 3 }}>
 				{selections?.map((item, index) => (
 					<TouchableOpacity
 						key={`${item}-${index}`}
@@ -104,7 +113,7 @@ const styles = StyleSheet.create({
 	contentContainer: {
 		flex: 1,
 		justifyContent: 'center',
-		alignItems: 'center',
+		// alignItems: '',
 		// backgroundColor:'red'
 	},
 	selectionButton: {
@@ -119,5 +128,12 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 
 		borderRadius: 10,
+	},
+	quizNumbersContainer: {
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		marginTop: 20,
 	},
 });

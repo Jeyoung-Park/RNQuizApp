@@ -80,6 +80,6 @@ const Quiz = ({ navigation }: QuizProps) => {
 export default Quiz;
 
 const styles = StyleSheet.create({
-	container: { flex: 1, backgroundColor:'white' },
+	container: { flex: 1, backgroundColor: 'white' },
 	buttonsContainer: { flexDirection: 'row', justifyContent: 'space-between' },
 });
