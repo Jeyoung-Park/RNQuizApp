@@ -24,7 +24,7 @@ const SingleQuiz = ({ currentIndex }: SingleQuizProps) => {
 
 	const [currentQuiz, setCurrentQuiz] = useState<Quiz>();
 	const [selections, setSelections] = useState<string[] | undefined>([]);
-	const [choice, setChoice] = useState<string>();
+	const [choice, setChoice] = useState<string | null>(null);
 
 	console.log('currentQuiz in SIngleQuiz, ', currentQuiz);
 
@@ -51,6 +51,8 @@ const SingleQuiz = ({ currentIndex }: SingleQuizProps) => {
 	}, [currentQuiz]);
 
 	useEffect(() => {
+		if (choice === undefined || choice === null) return;
+
 		if (choice === currentQuiz?.correct_answer) {
 			SimpleToast.show('정답입니다.');
 		} else {
