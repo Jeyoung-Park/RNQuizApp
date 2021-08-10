@@ -72,12 +72,7 @@ const Result = ({ navigation }: ResultProps) => {
 				chartConfig={chartConfig}
 				style={styles.pieChart}
 			/>
-			<View
-				style={{
-					flex: 1,
-					// backgroundColor: 'pink',
-				}}
-			>
+			<View style={styles.contentContainer}>
 				<Text>전체 문제: {quizList?.length}</Text>
 				<Text>정답 개수: {correctNumber}</Text>
 				<Text>오답 개수: {quizList?.length - correctNumber}</Text>
@@ -100,5 +95,13 @@ const styles = StyleSheet.create({
 
 		justifyContent: 'center',
 		alignItems: 'center',
+	},
+	contentContainer: {
+		flex: 1,
+		// backgroundColor: 'pink',
+		alignItems: 'center',
+		justifyContent: 'space-around',
+
+		paddingBottom: 20,
 	},
 });

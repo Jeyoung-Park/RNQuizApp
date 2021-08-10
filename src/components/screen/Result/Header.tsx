@@ -9,7 +9,7 @@ const Header = ({ goBack }: HeaderProps) => (
 	// eslint-disable-next-line @typescript-eslint/no-use-before-define
 	<View style={styles.container}>
 		<TouchableOpacity style={styles.backButton} onPress={goBack}>
-			<Text>Back</Text>
+			<Text>Go Home</Text>
 		</TouchableOpacity>
 		<Text>Result</Text>
 	</View>
