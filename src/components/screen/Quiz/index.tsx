@@ -11,13 +11,14 @@ import {
 import SimpleToast from 'react-native-simple-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { getQuizList_action } from '../../../models/quiz';
+import Header from './Header';
 import SingleQuiz from './SingleQuiz';
 
 interface QuizProps {
-	// navigation?: any;
+	navigation: any;
 }
 
-const Quiz = () => {
+const Quiz = ({ navigation }: QuizProps) => {
 	const dispatch = useDispatch();
 
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
@@ -26,13 +27,9 @@ const Quiz = () => {
 
 	console.log('quizList in Quiz index, ', quizList);
 
-	// const onPressPrevious = () => {
-	// 	if (currentIndex === 0) {
-	// 		SimpleToast.show('첫 번째 문제입니다.');
-	// 		return;
-	// 	}
-	// 	setCurrentIndex(currentIndex - 1);
-	// };
+	const goBack = () => {
+		navigation.goBack();
+	};
 
 	const goToNext = () => {
 		if (currentIndex === quizList?.length - 1) {
@@ -66,7 +63,7 @@ const Quiz = () => {
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<SafeAreaView style={styles.container}>
-			{/* <Text>Quiz</Text> */}
+			<Header goBack={goBack} />
 			<SingleQuiz currentIndex={currentIndex} goToNext={goToNext} />
 			{/* <View style={styles.buttonsContainer}>
 				<TouchableOpacity onPress={onPressPrevious}>
