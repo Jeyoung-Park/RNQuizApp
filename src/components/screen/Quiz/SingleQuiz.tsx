@@ -13,7 +13,7 @@ import SimpleToast from 'react-native-simple-toast';
 import { useSelector } from 'react-redux';
 import { Quiz } from '../../../interface';
 import config from '../../../config';
-import { number } from 'prop-types';
+// import { number } from 'prop-types';
 
 interface SingleQuizProps {
 	currentIndex: number;
@@ -22,6 +22,68 @@ interface SingleQuizProps {
 	// goToNext: () => void;
 	// setCurrentIndex: (param: number) => void;
 }
+
+interface QuizNumberProps {
+	currentIndex: number;
+	correctNumber: number;
+	quizList: Quiz[];
+}
+
+interface QuizCategoryProps {
+	currentQuiz: Quiz | undefined;
+}
+
+interface QuizContentProps {
+	currentQuiz: Quiz | undefined;
+}
+
+interface QuizSelectionsProps {
+	selections: string[] | undefined;
+	setChoice: (param: string) => void;
+	isSolved: boolean;
+}
+
+const QuizNumber = React.memo(
+	({ currentIndex, correctNumber, quizList }: QuizNumberProps) => (
+		<View style={styles.quizNumbersContainer}>
+			<Text>Q{currentIndex + 1}</Text>
+			<Text>
+				{correctNumber}/{quizList?.length}
+			</Text>
+		</View>
+	),
+);
+
+const QuizCategory = React.memo(({ currentQuiz }: QuizCategoryProps) => (
+	<View style={styles.contentContainer}>
+		<Text>{currentQuiz?.category}</Text>
+	</View>
+));
+
+const QuizQuestion = React.memo(({ currentQuiz }: QuizContentProps) => (
+	<View style={{ ...styles.contentContainer, flex: 2 }}>
+		<Text>{currentQuiz?.question}</Text>
+	</View>
+));
+
+const QuizSelection = React.memo(
+	({ selections, setChoice, isSolved }: QuizSelectionsProps) => (
+		<View style={{ ...styles.contentContainer, flex: 3 }}>
+			{selections?.map((item: string, index: number) => (
+				<TouchableOpacity
+					key={`${item}-${index}`}
+					onPress={() => {
+						setChoice(item);
+					}}
+					style={styles.selectionButton}
+					disabled={isSolved}
+				>
+					<Text>{item}</Text>
+				</TouchableOpacity>
+			))}
+		</View>
+	),
+);
 
 const SingleQuiz = ({
 	currentIndex,
@@ -32,7 +94,7 @@ const SingleQuiz = ({
 
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
 
-	const [currentQuiz, setCurrentQuiz] = useState<Quiz>();
+	const [currentQuiz, setCurrentQuiz] = useState<Quiz | undefined>();
 	const [selections, setSelections] = useState<string[] | undefined>([]);
 	const [choice, setChoice] = useState<string | null>(null);
 	const [correctNumber, setCorrectNumber] = useState<number>(0);
@@ -78,32 +140,18 @@ const SingleQuiz = ({
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<SafeAreaView style={styles.container}>
-			<View style={styles.quizNumbersContainer}>
-				<Text>Q{currentIndex + 1}</Text>
-				<Text>
-					{correctNumber}/{quizList?.length}
-				</Text>
-			</View>
-			<View style={styles.contentContainer}>
-				<Text>{currentQuiz?.category}</Text>
-			</View>
-			<View style={{ ...styles.contentContainer, flex: 2 }}>
-				<Text>{currentQuiz?.question}</Text>
-			</View>
-			<View style={{ ...styles.contentContainer, flex: 3 }}>
-				{selections?.map((item, index) => (
-					<TouchableOpacity
-						key={`${item}-${index}`}
-						onPress={() => {
-							setChoice(item);
-						}}
-						style={styles.selectionButton}
-						disabled={isSolved}
-					>
-						<Text>{item}</Text>
-					</TouchableOpacity>
-				))}
-			</View>
+			<QuizNumber
+				currentIndex={currentIndex}
+				correctNumber={correctNumber}
+				quizList={quizList}
+			/>
+			<QuizCategory currentQuiz={currentQuiz} />
+			<QuizQuestion currentQuiz={currentQuiz} />
+			<QuizSelection
+				selections={selections}
+				setChoice={setChoice}
+				isSolved={isSolved}
+			/>
 		</SafeAreaView>
 	);
 };
