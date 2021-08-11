@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import React, { useState, useEffect } from 'react';
 import {
 	Text,
@@ -12,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 	// getQuizListAction,
 	setQuizCorrectNumberAction,
+	setRetryCountAction,
 } from '../../../models/quiz';
 import { createTwoButtonAlert } from '../../../shared/Alert';
 import Header from './Header';
@@ -19,19 +21,28 @@ import SingleQuiz from './SingleQuiz';
 
 interface QuizProps {
 	navigation: any;
-	route: any;
 }
 
-const Quiz = ({ navigation, route }: QuizProps) => {
+const Quiz = ({ navigation }: QuizProps) => {
 	const dispatch = useDispatch();
 
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
+	const retryCount = useSelector((state) => state.quiz.retryCount);
 
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
 	const [isSolved, setIsSolved] = useState<boolean>(false);
 	const [correctNumber, setCorrectNumber] = useState<number>(0);
 
 	console.log('quizList in Quiz index, ', quizList);
+
+	const setRetryCount = (count: number) => {
+		try {
+			dispatch(setRetryCountAction(count));
+		} catch (e) {
+			console.warn('error in setRetryCount, ', e);
+			SimpleToast.show('재도전을 하는 데에 에러가 발생했습니다.');
+		}
+	};
 
 	const goBack = () => {
 		createTwoButtonAlert({
@@ -91,10 +102,18 @@ const Quiz = ({ navigation, route }: QuizProps) => {
 			'hardwareBackPress',
 			backAction,
 		);
-		return () => backHandler.remove();
+		return () => {
+			backHandler.remove();
+			setRetryCount(0);
+		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	useEffect(() => {
+		setCurrentIndex(0);
+		setIsSolved(false);
+		setCorrectNumber(0);
+	}, [retryCount]);
 
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define

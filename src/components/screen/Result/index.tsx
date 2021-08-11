@@ -7,11 +7,13 @@ import {
 	BackHandler,
 	TouchableOpacity,
 } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { PieChart } from 'react-native-chart-kit';
 import config from '../../../config';
 import Header from './Header';
 import { createTwoButtonAlert } from '../../../shared/Alert';
+import { setRetryCountAction } from '../../../models/quiz';
+import SimpleToast from 'react-native-simple-toast';
 
 interface ResultProps {
 	navigation: any;
@@ -36,9 +38,12 @@ const chartConfig = {
 };
 
 const Result = ({ navigation }: ResultProps) => {
+	const dispatch = useDispatch();
+
 	const correctNumber = useSelector((state) => state.quiz.correctNumber);
 	const quizTime = useSelector((state) => state.quiz.quizTime);
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
+	const retryCount = useSelector((state) => state.quiz.retryCount);
 
 	const data = [
 		{
@@ -56,6 +61,15 @@ const Result = ({ navigation }: ResultProps) => {
 			legendFontSize: 15,
 		},
 	];
+
+	const setRetryCount = (count: number) => {
+		try {
+			dispatch(setRetryCountAction(count));
+		} catch (e) {
+			console.warn('error in setRetryCount, ', e);
+			SimpleToast.show('재도전을 하는 데에 에러가 발생했습니다.');
+		}
+	};
 
 	const goBack = () => {
 		createTwoButtonAlert({
@@ -107,6 +121,8 @@ const Result = ({ navigation }: ResultProps) => {
 				<TouchableOpacity
 					style={styles.retryButton}
 					onPress={() => {
+						setRetryCount(retryCount + 1);
+
 						navigation.navigate('Quiz');
 					}}
 				>
