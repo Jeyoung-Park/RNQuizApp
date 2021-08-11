@@ -16,8 +16,11 @@ export const navigateToQuiz = async ({
 	try {
 		await dispatch(
 			getQuizListAction({
-				subPath: `?amount=${number}&type=multiple`,
-				params: null,
+				// subPath: `?amount=${number}&type=multiple`,
+				params: {
+					amount: number,
+					type: 'multiple',
+				},
 				data: null,
 			}),
 		);
