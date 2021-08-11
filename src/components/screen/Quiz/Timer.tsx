@@ -58,6 +58,7 @@ const Timer = ({ isStart }: TimerProps) => {
 					setTime({ seconds: nSeconds, minutes: nMinutes });
 				} else {
 					setQuizTime(time);
+					setTime({ seconds: 0, minutes: 0 });
 				}
 			}, 1000);
 		};
