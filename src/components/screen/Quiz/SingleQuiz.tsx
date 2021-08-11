@@ -11,12 +11,12 @@ import {
 } from 'react-native';
 import SimpleToast from 'react-native-simple-toast';
 import { useSelector } from 'react-redux';
+import { decode } from 'html-entities';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Quiz } from '../../../interface';
 import config from '../../../config';
 import Timer from './Timer';
 // import { number } from 'prop-types';
-import {decode} from 'html-entities';
-
 
 interface SingleQuizProps {
 	currentIndex: number;
@@ -88,7 +88,7 @@ const QuizSelection = React.memo(
 					style={styles.selectionButton}
 					disabled={isSolved}
 				>
-					<Text>{item}</Text>
+					<Text style={{marginHorizontal:10,}}>{item}</Text>
 				</TouchableOpacity>
 			))}
 		</View>
@@ -191,6 +191,7 @@ const styles = StyleSheet.create({
 		// flex:1,
 		width: config.WINDOW_WIDTH - 32,
 		paddingVertical: 20,
+		// height: 50,
 		backgroundColor: 'gray',
 
 		justifyContent: 'center',
