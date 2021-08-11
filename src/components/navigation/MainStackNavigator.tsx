@@ -22,6 +22,7 @@ const MainStackNavigator = () => (
 			component={Quiz}
 			options={{
 				headerShown: false,
+				gestureEnabled:false,
 			}}
 		/>
 		<Stack.Screen
@@ -29,6 +30,7 @@ const MainStackNavigator = () => (
 			component={Result}
 			options={{
 				headerShown: false,
+				gestureEnabled:false,
 			}}
 		/>
 	</Stack.Navigator>
