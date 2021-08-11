@@ -32,6 +32,7 @@ const Quiz = ({ navigation }: QuizProps) => {
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
 	const [isSolved, setIsSolved] = useState<boolean>(false);
 	const [correctNumber, setCorrectNumber] = useState<number>(0);
+	const [wrongQuizIndexList, setWrongQuizIndexList] = useState<number[]>([]);
 
 	console.log('quizList in Quiz index, ', quizList);
 
@@ -54,6 +55,13 @@ const Quiz = ({ navigation }: QuizProps) => {
 				navigation.goBack();
 			},
 		});
+	};
+
+	const resetValues = () => {
+		setCurrentIndex(0);
+		setIsSolved(false);
+		setCorrectNumber(0);
+		setWrongQuizIndexList([]);
 	};
 
 	// const getQuizList = async (numberOfQuiz: number = 10) => {
@@ -86,7 +94,9 @@ const Quiz = ({ navigation }: QuizProps) => {
 			// SimpleToast.show('마지막 문제입니다.');
 			// setIsStart(false);
 			setNumberOfCorrect(correctNumber);
-			navigation.navigate('Result');
+			navigation.navigate('Result', {
+				wrongQuizIndexList,
+			});
 			return;
 		}
 		setCurrentIndex(currentIndex + 1);
@@ -110,9 +120,7 @@ const Quiz = ({ navigation }: QuizProps) => {
 	}, []);
 
 	useEffect(() => {
-		setCurrentIndex(0);
-		setIsSolved(false);
-		setCorrectNumber(0);
+		resetValues();
 	}, [retryCount]);
 
 	return (
@@ -125,6 +133,8 @@ const Quiz = ({ navigation }: QuizProps) => {
 				setIsSolved={(param) => setIsSolved(param)}
 				correctNumber={correctNumber}
 				setCorrectNumber={(param) => setCorrectNumber(param)}
+				wrongQuizIndexList={wrongQuizIndexList}
+				setWrongQuizIndexList={(param) => setWrongQuizIndexList(param)}
 			/>
 			<View style={styles.buttonsContainer}>
 				{isSolved && (

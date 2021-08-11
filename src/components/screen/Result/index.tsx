@@ -9,14 +9,15 @@ import {
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { PieChart } from 'react-native-chart-kit';
+import SimpleToast from 'react-native-simple-toast';
 import config from '../../../config';
 import Header from './Header';
 import { createTwoButtonAlert } from '../../../shared/Alert';
 import { setRetryCountAction } from '../../../models/quiz';
-import SimpleToast from 'react-native-simple-toast';
 
 interface ResultProps {
 	navigation: any;
+	route: any;
 }
 
 const chartConfig = {
@@ -37,8 +38,12 @@ const chartConfig = {
 	},
 };
 
-const Result = ({ navigation }: ResultProps) => {
+const Result = ({ navigation, route }: ResultProps) => {
 	const dispatch = useDispatch();
+
+	const { wrongQuizIndexList } = route.params;
+
+	console.log('wrongQuizIndexList in Result index, ', wrongQuizIndexList);
 
 	const correctNumber = useSelector((state) => state.quiz.correctNumber);
 	const quizTime = useSelector((state) => state.quiz.quizTime);

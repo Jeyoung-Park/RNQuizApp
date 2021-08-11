@@ -24,6 +24,8 @@ interface SingleQuizProps {
 	setIsSolved: (param: boolean) => void;
 	correctNumber: number;
 	setCorrectNumber: (param: number) => void;
+	wrongQuizIndexList: number[];
+	setWrongQuizIndexList: (param: number[]) => void;
 	// isStart: boolean;
 	// setIsStart: (param: boolean) => void;
 }
@@ -101,6 +103,8 @@ const SingleQuiz = ({
 	setIsSolved,
 	correctNumber,
 	setCorrectNumber,
+	wrongQuizIndexList,
+	setWrongQuizIndexList,
 }: // isStart,
 // setIsStart,
 SingleQuizProps) => {
@@ -112,7 +116,8 @@ SingleQuizProps) => {
 	const [selections, setSelections] = useState<string[] | undefined>([]);
 	const [choice, setChoice] = useState<string | null>(null);
 
-	console.log('currentQuiz in SIngleQuiz, ', currentQuiz);
+	// console.log('currentQuiz in SIngleQuiz, ', currentQuiz);
+	console.log('wrongQuizIndexList, ', wrongQuizIndexList);
 
 	useEffect(() => {
 		setCurrentQuiz(quizList?.[currentIndex]);
@@ -145,6 +150,7 @@ SingleQuizProps) => {
 			setCorrectNumber(correctNumber + 1);
 		} else {
 			SimpleToast.show('오답입니다.');
+			setWrongQuizIndexList([...wrongQuizIndexList, currentIndex]);
 		}
 		// goToNext();
 		setIsSolved(true);
