@@ -25,7 +25,7 @@ const Home = ({ navigation }: HomeProps) => {
 		navigateToQuiz({
 			navigation,
 			dispatch,
-			number: 10,
+			number: 2,
 		});
 	};
 	return (

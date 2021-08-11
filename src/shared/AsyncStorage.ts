@@ -20,8 +20,10 @@ export const storeData = async ({ key, value }: StoreDataProps) => {
 };
 
 export const getData = async ({ key }: ReadDataProps) => {
+	// console.warn('getData 호출');
 	try {
 		const jsonValue = await AsyncStorage.getItem(key);
+		// console.log('jsonValue in getData, ', jsonValue);
 		return jsonValue != null ? JSON.parse(jsonValue) : null;
 	} catch (e) {
 		// error reading value

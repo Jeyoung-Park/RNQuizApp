@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	Text,
 	View,
@@ -14,6 +14,10 @@ import config from '../../../config';
 import Header from './Header';
 import { createTwoButtonAlert } from '../../../shared/Alert';
 import { setRetryCountAction } from '../../../models/quiz';
+import { getData, storeData } from '../../../shared/AsyncStorage';
+import Quiz from '../Quiz';
+
+const KEY_WRONG_QUIZZES = 'KEY_WRONG_QUIZZES';
 
 interface ResultProps {
 	navigation: any;
@@ -49,6 +53,15 @@ const Result = ({ navigation, route }: ResultProps) => {
 	const quizTime = useSelector((state) => state.quiz.quizTime);
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
 	const retryCount = useSelector((state) => state.quiz.retryCount);
+	const getDataFromStorage = async () => {
+		const result = await getData({ key: KEY_WRONG_QUIZZES });
+		return result;
+	};
+	const [initialWrongQuizzes, setinitialWrongQuizzes] = useState<Quiz[]>(
+		getDataFromStorage(),
+	);
+
+	// console.log('getAsyncData, ', await getData({ key: KEY_WRONG_QUIZZES }));
 
 	const data = [
 		{
@@ -92,12 +105,43 @@ const Result = ({ navigation, route }: ResultProps) => {
 			goBack();
 			return true;
 		};
+
+		// const result = getDataFromStorage();
+		// setinitialWrongQuizzes(result);
+
 		const backHandler = BackHandler.addEventListener(
 			'hardwareBackPress',
 			backAction,
 		);
 		return () => backHandler.remove();
 	}, []);
+
+	useEffect(() => {
+		// console.log('getData from storage, ', getDataFromStorage());
+
+		const wrongQuizList = [...quizList].filter((item: any, index: number) =>
+			wrongQuizIndexList.includes(index),
+		);
+
+		// console.log('wrongQuizzes---->', initialWrongQuizzes._W, wrongQuizList);
+
+		storeData({
+			key: KEY_WRONG_QUIZZES,
+			value: [...initialWrongQuizzes._W, ...wrongQuizList],
+		});
+
+		// 	if (initialWrongQuizzes !== undefined || initialWrongQuizzes !== null) {
+		// 		storeData({
+		// 			key: KEY_WRONG_QUIZZES,
+		// 			value: [...initialWrongQuizzes, ...wrongQuizList],
+		// 		});
+		// 	} else {
+		// 		storeData({
+		// 			key: KEY_WRONG_QUIZZES,
+		// 			value: wrongQuizList,
+		// 		});
+		// 	}
+	}, [wrongQuizIndexList]);
 
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
