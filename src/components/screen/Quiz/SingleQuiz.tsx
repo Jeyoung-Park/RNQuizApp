@@ -88,7 +88,7 @@ const QuizSelection = React.memo(
 					style={styles.selectionButton}
 					disabled={isSolved}
 				>
-					<Text style={{marginHorizontal:10,}}>{item}</Text>
+					<Text style={styles.quizText}>{decode(item)}</Text>
 				</TouchableOpacity>
 			))}
 		</View>
@@ -208,4 +208,5 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		marginTop: 20,
 	},
+	quizText: { marginHorizontal: 10 },
 });
