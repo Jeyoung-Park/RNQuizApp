@@ -15,6 +15,8 @@ import { Quiz } from '../../../interface';
 import config from '../../../config';
 import Timer from './Timer';
 // import { number } from 'prop-types';
+import {decode} from 'html-entities';
+
 
 interface SingleQuizProps {
 	currentIndex: number;
@@ -64,13 +66,13 @@ const QuizNumber = React.memo(
 
 const QuizCategory = React.memo(({ currentQuiz }: QuizCategoryProps) => (
 	<View style={styles.contentContainer}>
-		<Text>{currentQuiz?.category}</Text>
+		<Text>{decode(currentQuiz?.category)}</Text>
 	</View>
 ));
 
 const QuizQuestion = React.memo(({ currentQuiz }: QuizContentProps) => (
 	<View style={{ ...styles.contentContainer, flex: 2 }}>
-		<Text>{currentQuiz?.question}</Text>
+		<Text>{decode(currentQuiz?.question)}</Text>
 	</View>
 ));
 
