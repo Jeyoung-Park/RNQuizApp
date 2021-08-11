@@ -4,10 +4,12 @@ import {
 	Text,
 	View,
 	StyleSheet,
-	Button,
+	// Button,
 	TouchableOpacity,
 	SafeAreaView,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { navigateToQuiz } from '../../../shared/NavigateTo';
 
 interface HomeProps {
 	// route:any,
@@ -15,9 +17,16 @@ interface HomeProps {
 }
 
 const Home = ({ navigation }: HomeProps) => {
+	const dispatch = useDispatch();
+
 	const goToQuiz = () => {
 		// console.log("퀴즈 풀기 버튼 클릭");
-		navigation.navigate('Quiz');
+		// navigation.navigate('Quiz');
+		navigateToQuiz({
+			navigation,
+			dispatch,
+			number: 10,
+		});
 	};
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define

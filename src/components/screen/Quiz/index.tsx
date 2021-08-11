@@ -10,7 +10,7 @@ import {
 import SimpleToast from 'react-native-simple-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-	getQuizListAction,
+	// getQuizListAction,
 	setQuizCorrectNumberAction,
 } from '../../../models/quiz';
 import { createTwoButtonAlert } from '../../../shared/Alert';
@@ -44,21 +44,21 @@ const Quiz = ({ navigation }: QuizProps) => {
 		});
 	};
 
-	const getQuizList = async (numberOfQuiz: number = 10) => {
-		try {
-			const result = await dispatch(
-				getQuizListAction({
-					subPath: `?amount=${numberOfQuiz}&type=multiple`,
-					params: null,
-					data: null,
-				}),
-			);
-			console.log('result in getQuizList, ', result);
-		} catch (e) {
-			console.warn('error in getQuizList, ', e);
-			SimpleToast.show('퀴즈 목록을 불러오는 데 실패했습니다.');
-		}
-	};
+	// const getQuizList = async (numberOfQuiz: number = 10) => {
+	// 	try {
+	// 		const result = await dispatch(
+	// 			getQuizListAction({
+	// 				subPath: `?amount=${numberOfQuiz}&type=multiple`,
+	// 				params: null,
+	// 				data: null,
+	// 			}),
+	// 		);
+	// 		console.log('result in getQuizList, ', result);
+	// 	} catch (e) {
+	// 		console.warn('error in getQuizList, ', e);
+	// 		SimpleToast.show('퀴즈 목록을 불러오는 데 실패했습니다.');
+	// 	}
+	// };
 
 	const setNumberOfCorrect = (number: number) => {
 		try {
@@ -81,7 +81,7 @@ const Quiz = ({ navigation }: QuizProps) => {
 	};
 
 	useEffect(() => {
-		getQuizList(2);
+		// getQuizList(2);
 		const backAction = () => {
 			goBack();
 			return true;
