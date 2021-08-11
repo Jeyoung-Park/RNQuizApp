@@ -1,5 +1,12 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import React, { useEffect } from 'react';
-import { Text, View, StyleSheet, BackHandler } from 'react-native';
+import {
+	Text,
+	View,
+	StyleSheet,
+	BackHandler,
+	TouchableOpacity,
+} from 'react-native';
 import { useSelector } from 'react-redux';
 import { PieChart } from 'react-native-chart-kit';
 import config from '../../../config';
@@ -96,6 +103,16 @@ const Result = ({ navigation }: ResultProps) => {
 				<Text>오답 개수: {quizList?.length - correctNumber}</Text>
 				<Text>소요 시간: {quizTime} </Text>
 			</View>
+			<View style={styles.buttonContainer}>
+				<TouchableOpacity
+					style={styles.retryButton}
+					onPress={() => {
+						navigation.navigate('Quiz');
+					}}
+				>
+					<Text>다시 풀기</Text>
+				</TouchableOpacity>
+			</View>
 		</View>
 	);
 };
@@ -121,5 +138,21 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-around',
 
 		paddingBottom: 20,
+	},
+
+	buttonContainer: {
+		marginVertical: 50,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	retryButton: {
+		width: '80%',
+		backgroundColor: 'gray',
+		borderRadius: 20,
+
+		paddingVertical: 20,
+
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 });

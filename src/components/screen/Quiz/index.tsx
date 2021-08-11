@@ -19,9 +19,10 @@ import SingleQuiz from './SingleQuiz';
 
 interface QuizProps {
 	navigation: any;
+	route: any;
 }
 
-const Quiz = ({ navigation }: QuizProps) => {
+const Quiz = ({ navigation, route }: QuizProps) => {
 	const dispatch = useDispatch();
 
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
@@ -93,6 +94,7 @@ const Quiz = ({ navigation }: QuizProps) => {
 		return () => backHandler.remove();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
 
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
