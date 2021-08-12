@@ -163,5 +163,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'flex-end',
 		alignItems: 'center',
 		height: 50,
+
+		paddingRight: 20,
 	},
 });
