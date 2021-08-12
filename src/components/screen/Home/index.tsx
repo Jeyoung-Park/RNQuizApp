@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
+import { useEffect } from 'react';
 import {
 	Text,
 	View,
@@ -9,7 +10,10 @@ import {
 	SafeAreaView,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
+import { getData } from '../../../shared/AsyncStorage';
 import { navigateToQuiz } from '../../../shared/NavigateTo';
+
+const KEY_WRONG_QUIZZES = 'KEY_WRONG_QUIZZES';
 
 interface HomeProps {
 	// route:any,
@@ -32,6 +36,13 @@ const Home = ({ navigation }: HomeProps) => {
 	const goToWrongQuiz = () => {
 		navigation.navigate('WrongQuiz');
 	};
+
+	useEffect(() => {
+		getData({
+			key: KEY_WRONG_QUIZZES,
+			dispatch,
+		});
+	}, []);
 
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
