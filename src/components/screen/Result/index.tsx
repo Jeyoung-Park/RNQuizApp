@@ -53,7 +53,7 @@ const Result = ({ navigation, route }: ResultProps) => {
 	const quizTime = useSelector((state) => state.quiz.quizTime);
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
 	const retryCount = useSelector((state) => state.quiz.retryCount);
-	const wrongQuizList = useSelector((state) => state.quiz.wrongQuizList);
+	const wrongQuizList = useSelector((state) => state.wrongQuiz.wrongQuizList);
 	// const getDataFromStorage = async () => {
 	// 	const result = await getData({ key: KEY_WRONG_QUIZZES });
 	// 	return result;
@@ -122,13 +122,23 @@ const Result = ({ navigation, route }: ResultProps) => {
 			(item: any, index: number) => wrongQuizIndexList.includes(index),
 		);
 
+		console.log('currentWrongQuizList, ', currentWrongQuizList);
+		console.log('wrongQuizList, ', wrongQuizList);
 		// console.log('wrongQuizzes---->', initialWrongQuizzes._W, wrongQuizList);
 
-		storeData({
-			key: KEY_WRONG_QUIZZES,
-			value: [...wrongQuizList, ...currentWrongQuizList],
-			// dispatch
-		});
+		if (wrongQuizList) {
+			storeData({
+				key: KEY_WRONG_QUIZZES,
+				value: [...wrongQuizList, ...currentWrongQuizList],
+				// dispatch
+			});
+		} else {
+			storeData({
+				key: KEY_WRONG_QUIZZES,
+				value: currentWrongQuizList,
+				// dispatch
+			});
+		}
 
 		getData({
 			key: KEY_WRONG_QUIZZES,
