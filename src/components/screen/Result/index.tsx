@@ -12,7 +12,7 @@ import { PieChart } from 'react-native-chart-kit';
 import SimpleToast from 'react-native-simple-toast';
 import config from '../../../config';
 import Header from './Header';
-import { createTwoButtonAlert } from '../../../shared/Alert';
+import { createTwoButtonAlert } from '../../../shared/function/Alert';
 import { setRetryCountAction } from '../../../models/quiz';
 import { getData, storeData } from '../../../shared/AsyncStorage';
 import Quiz from '../Quiz';

@@ -10,8 +10,8 @@ import {
 	SafeAreaView,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { getData } from '../../../shared/AsyncStorage';
-import { navigateToQuiz } from '../../../shared/NavigateTo';
+import { getData } from '../../../shared/functions/AsyncStorage';
+import { navigateToQuiz } from '../../../shared/functions/NavigateTo';
 
 const KEY_WRONG_QUIZZES = 'KEY_WRONG_QUIZZES';
 
