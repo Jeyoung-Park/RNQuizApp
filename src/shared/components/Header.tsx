@@ -3,15 +3,18 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 interface HeaderProps {
 	goBack: () => void;
+	title: string;
+	// eslint-disable-next-line react/require-default-props
+	goBackText?: string;
 }
 
-const Header = ({ goBack }: HeaderProps) => (
+const Header = ({ goBack, title, goBackText }: HeaderProps) => (
 	// eslint-disable-next-line @typescript-eslint/no-use-before-define
 	<View style={styles.container}>
 		<TouchableOpacity style={styles.backButton} onPress={goBack}>
-			<Text>Go Home</Text>
+			<Text>{goBackText}</Text>
 		</TouchableOpacity>
-		<Text>Result</Text>
+		<Text>{title}</Text>
 	</View>
 );
 

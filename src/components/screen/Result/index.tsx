@@ -11,11 +11,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PieChart } from 'react-native-chart-kit';
 import SimpleToast from 'react-native-simple-toast';
 import config from '../../../config';
-import Header from './Header';
 import { createTwoButtonAlert } from '../../../shared/functions/Alert';
 import { setRetryCountAction } from '../../../models/quiz';
 import { getData, storeData } from '../../../shared/functions/AsyncStorage';
 import Quiz from '../Quiz';
+import Header from '../../../shared/components/Header';
 
 const KEY_WRONG_QUIZZES = 'KEY_WRONG_QUIZZES';
 
@@ -166,7 +166,7 @@ const Result = ({ navigation, route }: ResultProps) => {
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<View style={styles.container}>
-			<Header goBack={goBack} />
+			<Header title="Result" goBackText="Go Home" goBack={goBack} />
 			<PieChart
 				data={data}
 				width={config.WINDOW_WIDTH}

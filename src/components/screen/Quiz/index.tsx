@@ -16,7 +16,7 @@ import {
 	setRetryCountAction,
 } from '../../../models/quiz';
 import { createTwoButtonAlert } from '../../../shared/functions/Alert';
-import Header from './Header';
+import Header from '../../../shared/components/Header';
 import SingleQuiz from './SingleQuiz';
 
 interface QuizProps {
@@ -132,7 +132,7 @@ const Quiz = ({ navigation }: QuizProps) => {
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<SafeAreaView style={styles.container}>
-			<Header goBack={goBack} />
+			<Header goBack={goBack} title="Quiz" goBackText="Go Back" />
 			<SingleQuiz
 				currentQuiz={currentQuiz}
 				currentIndex={currentIndex}
