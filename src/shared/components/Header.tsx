@@ -14,7 +14,8 @@ const Header = ({ goBack, title, goBackText }: HeaderProps) => (
 		<TouchableOpacity style={styles.backButton} onPress={goBack}>
 			<Text>{goBackText}</Text>
 		</TouchableOpacity>
-		<Text>{title}</Text>
+		<Text style={styles.title}>{title}</Text>
+		<View style={styles.backButton} />
 	</View>
 );
 
@@ -24,18 +25,21 @@ const styles = StyleSheet.create({
 	container: {
 		width: '100%',
 		flexDirection: 'row',
-		justifyContent: 'center',
-
+		justifyContent: 'space-between',
+		alignItems: 'center',
 		// backgroundColor: 'red',
-		paddingVertical: 10,
+		paddingVertical: 20,
 
 		borderBottomColor: 'gray',
 		borderBottomWidth: 1,
 	},
 	backButton: {
-		position: 'absolute',
-		left: 0,
-		paddingTop: 10,
-		marginLeft: 16,
+		width: 100,
+		height: 30,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	title: {
+		fontSize: 20,
 	},
 });
