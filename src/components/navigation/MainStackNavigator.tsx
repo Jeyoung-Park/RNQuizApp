@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from '../screen/Home';
 import Quiz from '../screen/Quiz';
 import Result from '../screen/Result';
+import WrongQuiz from '../screen/WrongQuiz';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +23,7 @@ const MainStackNavigator = () => (
 			component={Quiz}
 			options={{
 				headerShown: false,
-				gestureEnabled:false,
+				gestureEnabled: false,
 			}}
 		/>
 		<Stack.Screen
@@ -30,11 +31,17 @@ const MainStackNavigator = () => (
 			component={Result}
 			options={{
 				headerShown: false,
-				gestureEnabled:false,
+				gestureEnabled: false,
+			}}
+		/>
+		<Stack.Screen
+			name="WrongQuiz"
+			component={WrongQuiz}
+			options={{
+				headerShown: false,
 			}}
 		/>
 	</Stack.Navigator>
 );
 
 export default MainStackNavigator;
-

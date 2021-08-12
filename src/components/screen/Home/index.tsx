@@ -28,6 +28,11 @@ const Home = ({ navigation }: HomeProps) => {
 			number: 2,
 		});
 	};
+
+	const goToWrongQuiz = () => {
+		navigation.navigate('WrongQuiz');
+	};
+
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<SafeAreaView style={styles.container}>
@@ -41,6 +46,9 @@ const Home = ({ navigation }: HomeProps) => {
 			<View style={styles.buttonContainer}>
 				<TouchableOpacity style={styles.quizButton} onPress={goToQuiz}>
 					<Text style={styles.quizButtonText}>퀴즈 풀기</Text>
+				</TouchableOpacity>
+				<TouchableOpacity style={styles.quizButton} onPress={goToWrongQuiz}>
+					<Text style={styles.quizButtonText}>오답 노트</Text>
 				</TouchableOpacity>
 			</View>
 		</SafeAreaView>
@@ -69,10 +77,12 @@ const styles = StyleSheet.create({
 		flex: 1,
 		// backgroundColor:'red',
 		width: '100%',
-		justifyContent: 'center',
+		justifyContent: 'space-around',
 		alignItems: 'center',
+		marginBottom: 50,
 	},
 	quizButton: {
+		// flex: 1,
 		width: '80%',
 		paddingVertical: 20,
 
