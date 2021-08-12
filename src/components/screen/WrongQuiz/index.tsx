@@ -1,18 +1,27 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, SafeAreaView } from 'react-native';
+import Header from './Header';
 
-interface WrongQuizProps {}
+interface WrongQuizProps {
+	navigation: any;
+}
 
-const WrongQuiz = (props: WrongQuizProps) => {
+const WrongQuiz = ({ navigation }: WrongQuizProps) => {
+	const goBack = () => {
+		navigation.goBack();
+	};
+
 	return (
-		<View style={styles.container}>
-			<Text>WrongQuiz</Text>
-		</View>
+		<SafeAreaView style={styles.container}>
+			<Header goBack={goBack} />
+		</SafeAreaView>
 	);
 };
 
 export default WrongQuiz;
 
 const styles = StyleSheet.create({
-	container: {},
+	container: {
+		flex: 1,
+	},
 });
