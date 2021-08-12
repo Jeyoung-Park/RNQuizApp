@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
+import Header from '../../../shared/components/Header';
 import SingleQuiz from '../Quiz/SingleQuiz';
 
 interface SingleWrongQuizProps {
@@ -12,9 +13,14 @@ const SingleWrongQuiz = ({ navigation, route }: SingleWrongQuizProps) => {
 
 	const [isSolved, setIsSolved] = useState<boolean>(false);
 
+	const goBack = () => {
+		navigation.goBack();
+	};
+
 	return (
 		<View style={styles.container}>
 			{/* <Text>SingleWrongQuiz</Text> */}
+			<Header title="오답노트 상세" goBackText="go Back" goBack={goBack} />
 			<View style={styles.singleQuizContainer}>
 				<SingleQuiz
 					currentQuiz={quizItem}
