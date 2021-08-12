@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { decode } from 'html-entities';
 import { Quiz } from '../../../types';
 
 interface WrongQuizItemProps {
@@ -17,7 +18,7 @@ const WrongQuizItem = ({
 		style={[styles.container, { height: itemHeight }]}
 		onPress={() => onPress(quizItem)}
 	>
-		<Text>{quizItem.question}</Text>
+		<Text>{decode(quizItem.question)}</Text>
 	</TouchableOpacity>
 );
 
