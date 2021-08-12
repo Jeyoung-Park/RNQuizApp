@@ -126,6 +126,11 @@ const Result = ({ navigation, route }: ResultProps) => {
 		console.log('wrongQuizList, ', wrongQuizList);
 		// console.log('wrongQuizzes---->', initialWrongQuizzes._W, wrongQuizList);
 
+		// 다시 풀기의 경우 문제를 맞추거나 틀려도 오답노트에 반영이 되지 않음.
+		if (retryCount > 0) {
+			return;
+		}
+
 		if (wrongQuizList) {
 			storeData({
 				key: KEY_WRONG_QUIZZES,
@@ -185,9 +190,17 @@ const Result = ({ navigation, route }: ResultProps) => {
 				<TouchableOpacity
 					style={styles.retryButton}
 					onPress={() => {
-						setRetryCount(retryCount + 1);
+						createTwoButtonAlert({
+							message:
+								'다시 풀기의 경우, 다시 푼 문제의 정답/오답 결과가 오답노트에 반영되지 않습니다.\n다시 푸시겠습니까?',
+							text_ok: '다시 풀기',
+							text_cancel: '취소',
+							function_ok: () => {
+								setRetryCount(retryCount + 1);
 
-						navigation.navigate('Quiz');
+								navigation.navigate('Quiz');
+							},
+						});
 					}}
 				>
 					<Text>다시 풀기</Text>
