@@ -17,7 +17,7 @@ const WrongQuiz = ({ navigation }: WrongQuizProps) => {
 	return (
 		<SafeAreaView style={styles.container}>
 			<Header goBack={goBack} />
-			<WrongQuizList />
+			<WrongQuizList navigation={navigation} />
 		</SafeAreaView>
 	);
 };

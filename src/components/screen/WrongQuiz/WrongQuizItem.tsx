@@ -5,15 +5,21 @@ import { Quiz } from '../../../types';
 interface WrongQuizItemProps {
 	quizItem: Quiz;
 	itemHeight: number;
+	onPress: (param: Quiz) => void;
 }
 
-const WrongQuizItem = ({ quizItem, itemHeight }: WrongQuizItemProps) => {
-	return (
-		<TouchableOpacity style={[styles.container, { height: itemHeight }]}>
-			<Text>{quizItem.question}</Text>
-		</TouchableOpacity>
-	);
-};
+const WrongQuizItem = ({
+	quizItem,
+	itemHeight,
+	onPress,
+}: WrongQuizItemProps) => (
+	<TouchableOpacity
+		style={[styles.container, { height: itemHeight }]}
+		onPress={() => onPress(quizItem)}
+	>
+		<Text>{quizItem.question}</Text>
+	</TouchableOpacity>
+);
 
 export default WrongQuizItem;
 

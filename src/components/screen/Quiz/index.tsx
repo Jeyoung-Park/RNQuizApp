@@ -33,6 +33,7 @@ const Quiz = ({ navigation }: QuizProps) => {
 	const [isSolved, setIsSolved] = useState<boolean>(false);
 	const [correctNumber, setCorrectNumber] = useState<number>(0);
 	const [wrongQuizIndexList, setWrongQuizIndexList] = useState<number[]>([]);
+	const [currentQuiz, setCurrentQuiz] = useState<Quiz | undefined>();
 
 	console.log('quizList in Quiz index, ', quizList);
 
@@ -120,6 +121,11 @@ const Quiz = ({ navigation }: QuizProps) => {
 	}, []);
 
 	useEffect(() => {
+		setCurrentQuiz(quizList?.[currentIndex]);
+		setIsSolved(false);
+	}, [currentIndex, quizList]);
+
+	useEffect(() => {
 		resetValues();
 	}, [retryCount]);
 
@@ -128,6 +134,7 @@ const Quiz = ({ navigation }: QuizProps) => {
 		<SafeAreaView style={styles.container}>
 			<Header goBack={goBack} />
 			<SingleQuiz
+				currentQuiz={currentQuiz}
 				currentIndex={currentIndex}
 				isSolved={isSolved}
 				setIsSolved={(param) => setIsSolved(param)}

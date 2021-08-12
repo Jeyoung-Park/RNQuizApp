@@ -6,6 +6,7 @@ import Home from '../screen/Home';
 import Quiz from '../screen/Quiz';
 import Result from '../screen/Result';
 import WrongQuiz from '../screen/WrongQuiz';
+import SingleWrongQuiz from '../screen/WrongQuiz/SingleWrongQuiz';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,13 @@ const MainStackNavigator = () => (
 		<Stack.Screen
 			name="WrongQuiz"
 			component={WrongQuiz}
+			options={{
+				headerShown: false,
+			}}
+		/>
+		<Stack.Screen
+			name="SingleWrongQuiz"
+			component={SingleWrongQuiz}
 			options={{
 				headerShown: false,
 			}}

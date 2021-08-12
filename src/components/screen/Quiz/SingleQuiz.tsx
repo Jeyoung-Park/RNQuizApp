@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import * as React from 'react';
@@ -19,13 +20,14 @@ import Timer from './Timer';
 // import { number } from 'prop-types';
 
 interface SingleQuizProps {
-	currentIndex: number;
+	currentQuiz: Quiz;
+	currentIndex?: number;
 	isSolved: boolean;
 	setIsSolved: (param: boolean) => void;
-	correctNumber: number;
-	setCorrectNumber: (param: number) => void;
-	wrongQuizIndexList: number[];
-	setWrongQuizIndexList: (param: number[]) => void;
+	correctNumber?: number;
+	setCorrectNumber?: (param: number) => void;
+	wrongQuizIndexList?: number[];
+	setWrongQuizIndexList?: (param: number[]) => void;
 	// isStart: boolean;
 	// setIsStart: (param: boolean) => void;
 }
@@ -98,6 +100,7 @@ const QuizSelection = React.memo(
 );
 
 const SingleQuiz = ({
+	currentQuiz,
 	currentIndex,
 	isSolved,
 	setIsSolved,
@@ -112,17 +115,10 @@ SingleQuizProps) => {
 
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
 
-	const [currentQuiz, setCurrentQuiz] = useState<Quiz | undefined>();
 	const [selections, setSelections] = useState<string[] | undefined>([]);
 	const [choice, setChoice] = useState<string | null>(null);
 
 	// console.log('currentQuiz in SIngleQuiz, ', currentQuiz);
-	console.log('wrongQuizIndexList, ', wrongQuizIndexList);
-
-	useEffect(() => {
-		setCurrentQuiz(quizList?.[currentIndex]);
-		setIsSolved(false);
-	}, [currentIndex, quizList]);
 
 	useEffect(() => {
 		const randomNum = Math.floor(Math.random() * 4);
@@ -147,10 +143,11 @@ SingleQuizProps) => {
 
 		if (choice === currentQuiz?.correct_answer) {
 			SimpleToast.show('정답입니다.');
-			setCorrectNumber(correctNumber + 1);
+			setCorrectNumber && setCorrectNumber(correctNumber + 1);
 		} else {
 			SimpleToast.show('오답입니다.');
-			setWrongQuizIndexList([...wrongQuizIndexList, currentIndex]);
+			setWrongQuizIndexList &&
+				setWrongQuizIndexList([...wrongQuizIndexList, currentIndex]);
 		}
 		// goToNext();
 		setIsSolved(true);
@@ -159,12 +156,14 @@ SingleQuizProps) => {
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<SafeAreaView style={styles.container}>
-			<QuizNumber
-				currentIndex={currentIndex}
-				correctNumber={correctNumber}
-				quizList={quizList}
-				isStart={!(currentIndex === quizList?.length - 1 && isSolved)}
-			/>
+			{correctNumber !== undefined && (
+				<QuizNumber
+					currentIndex={currentIndex}
+					correctNumber={correctNumber}
+					quizList={quizList}
+					isStart={!(currentIndex === quizList?.length - 1 && isSolved)}
+				/>
+			)}
 			<QuizCategory currentQuiz={currentQuiz} />
 			<QuizQuestion currentQuiz={currentQuiz} />
 			<QuizSelection
