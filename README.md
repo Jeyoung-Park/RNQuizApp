@@ -23,7 +23,8 @@ react native를 이용한 퀴즈 앱입니다. <br />
 틀린 문제들을 확인하실 수 있습니다.<br />
 문제를 클릭하면 문제 상세로 넘어가게 되고 문제를 다시 풀어보실 수 있습니다. <br /><br />
 <img src="https://user-images.githubusercontent.com/59302192/129241840-7dbe609b-af7d-496c-85c0-402495d8aa7a.png" width="400" />
-<img src="https://user-images.githubusercontent.com/59302192/129241846-e2de8d53-805d-4c92-87c5-7b496868bb52.png" width="400" />
+<img src="https://user-images.githubusercontent.com/59302192/129242233-d20741bc-141c-4359-af63-063258944de9.png" width="400" />
+
 
 
 
