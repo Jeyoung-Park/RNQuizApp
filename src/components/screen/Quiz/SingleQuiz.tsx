@@ -13,7 +13,7 @@ import SimpleToast from 'react-native-simple-toast';
 import { useSelector } from 'react-redux';
 import { decode } from 'html-entities';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Quiz } from '../../../interface';
+import { Quiz } from '../../../types';
 import config from '../../../config';
 import Timer from './Timer';
 // import { number } from 'prop-types';

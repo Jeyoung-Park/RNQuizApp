@@ -53,15 +53,14 @@ const Result = ({ navigation, route }: ResultProps) => {
 	const quizTime = useSelector((state) => state.quiz.quizTime);
 	const quizList = useSelector((state) => state.quiz.quizList.result?.results);
 	const retryCount = useSelector((state) => state.quiz.retryCount);
-	const getDataFromStorage = async () => {
-		const result = await getData({ key: KEY_WRONG_QUIZZES });
-		return result;
-	};
-	const [initialWrongQuizzes, setinitialWrongQuizzes] = useState<Quiz[]>(
-		getDataFromStorage(),
-	);
-
-	// console.log('getAsyncData, ', await getData({ key: KEY_WRONG_QUIZZES }));
+	const wrongQuizList = useSelector((state) => state.quiz.wrongQuizList);
+	// const getDataFromStorage = async () => {
+	// 	const result = await getData({ key: KEY_WRONG_QUIZZES });
+	// 	return result;
+	// };
+	// const [initialWrongQuizzes, setInitialWrongQuizzes] = useState<Quiz[]>(
+	// 	getDataFromStorage()
+	// );
 
 	const data = [
 		{
@@ -119,15 +118,21 @@ const Result = ({ navigation, route }: ResultProps) => {
 	useEffect(() => {
 		// console.log('getData from storage, ', getDataFromStorage());
 
-		const wrongQuizList = [...quizList].filter((item: any, index: number) =>
-			wrongQuizIndexList.includes(index),
+		const currentWrongQuizList = [...quizList].filter(
+			(item: any, index: number) => wrongQuizIndexList.includes(index),
 		);
 
 		// console.log('wrongQuizzes---->', initialWrongQuizzes._W, wrongQuizList);
 
 		storeData({
 			key: KEY_WRONG_QUIZZES,
-			value: [...initialWrongQuizzes._W, ...wrongQuizList],
+			value: [...wrongQuizList, ...currentWrongQuizList],
+			// dispatch
+		});
+
+		getData({
+			key: KEY_WRONG_QUIZZES,
+			dispatch,
 		});
 
 		// 	if (initialWrongQuizzes !== undefined || initialWrongQuizzes !== null) {

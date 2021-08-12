@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setWrongQuizListAction } from '../models/quiz';
 
 interface StoreDataProps extends ReadDataProps {
 	// key: string;
@@ -7,6 +8,7 @@ interface StoreDataProps extends ReadDataProps {
 
 interface ReadDataProps {
 	key: string;
+	dispatch?: any;
 }
 
 export const storeData = async ({ key, value }: StoreDataProps) => {
@@ -19,12 +21,17 @@ export const storeData = async ({ key, value }: StoreDataProps) => {
 	}
 };
 
-export const getData = async ({ key }: ReadDataProps) => {
+export const getData = async ({ key, dispatch }: ReadDataProps) => {
 	// console.warn('getData 호출');
 	try {
 		const jsonValue = await AsyncStorage.getItem(key);
 		// console.log('jsonValue in getData, ', jsonValue);
-		return jsonValue != null ? JSON.parse(jsonValue) : null;
+
+		dispatch(
+			setWrongQuizListAction(jsonValue != null ? JSON.parse(jsonValue) : null),
+		);
+
+		// return jsonValue != null ? JSON.parse(jsonValue) : null;
 	} catch (e) {
 		// error reading value
 		console.warn('error reading data, ', e);

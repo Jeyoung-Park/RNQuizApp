@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import invokeAPI from '../restApi';
 import { createPromiseThunk } from './lib/asyncUtils';
+import { Quiz } from '../types';
 
 // 초기 상태
 export const initialState = {
@@ -12,6 +13,8 @@ export const initialState = {
 	correctNumber: null,
 	// 재도전 횟수
 	retryCount: 0,
+	// 오답노트 목록
+	wrongQuizList: [],
 };
 
 // 액션 정의
@@ -32,6 +35,9 @@ const SET_QUIZ_CORRECT_NUMBER = 'quiz/SET_QUIZ_CORRECT_NUMBER';
 
 // 퀴즈 retry 횟수 set하기
 const SET_RETRY_COUNT = 'quiz/SET_RETRY_COUNT';
+
+// 오답노트 목록 set하기
+const SET_WRONG_QUIZ_LIST = 'quiz/SET_WRONG_QUIZ_LIST';
 
 // *********************************** thunk ************************************
 //  비동기 액션일 때는 createPromiseThunk 호출, 아니면 그냥 action(object) 리턴
@@ -56,6 +62,11 @@ export const setQuizCorrectNumberAction = (quizCorrectNumber: number) => ({
 export const setRetryCountAction = (retryCount: number) => ({
 	type: SET_RETRY_COUNT,
 	payload: retryCount,
+});
+
+export const setWrongQuizListAction = (wrongQuizList: any) => ({
+	type: SET_WRONG_QUIZ_LIST,
+	payload: wrongQuizList,
 });
 
 // *********************************** reducer ***********************************
@@ -87,6 +98,14 @@ export default handleActions(
 		) => ({
 			...state,
 			retryCount: result,
+		}),
+
+		[SET_WRONG_QUIZ_LIST]: (
+			state: any,
+			{ payload: result }: { payload: number },
+		) => ({
+			...state,
+			wrongQuizList: result,
 		}),
 	},
 	initialState,
