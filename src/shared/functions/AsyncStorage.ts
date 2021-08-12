@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { setWrongQuizListAction } from '../models/wrongQuiz';
+import { setWrongQuizListAction } from '../../models/wrongQuiz';
 
 interface StoreDataProps extends ReadDataProps {
 	// key: string;

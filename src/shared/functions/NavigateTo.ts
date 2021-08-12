@@ -1,5 +1,5 @@
 import SimpleToast from 'react-native-simple-toast';
-import { getQuizListAction } from '../models/quiz';
+import { getQuizListAction } from '../../models/quiz';
 
 interface NavigateToQuizProps {
 	navigation: any;

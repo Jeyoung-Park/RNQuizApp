@@ -15,7 +15,7 @@ import {
 	setQuizCorrectNumberAction,
 	setRetryCountAction,
 } from '../../../models/quiz';
-import { createTwoButtonAlert } from '../../../shared/function/Alert';
+import { createTwoButtonAlert } from '../../../shared/functions/Alert';
 import Header from './Header';
 import SingleQuiz from './SingleQuiz';
 

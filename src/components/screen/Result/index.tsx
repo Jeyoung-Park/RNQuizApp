@@ -12,9 +12,9 @@ import { PieChart } from 'react-native-chart-kit';
 import SimpleToast from 'react-native-simple-toast';
 import config from '../../../config';
 import Header from './Header';
-import { createTwoButtonAlert } from '../../../shared/function/Alert';
+import { createTwoButtonAlert } from '../../../shared/functions/Alert';
 import { setRetryCountAction } from '../../../models/quiz';
-import { getData, storeData } from '../../../shared/AsyncStorage';
+import { getData, storeData } from '../../../shared/functions/AsyncStorage';
 import Quiz from '../Quiz';
 
 const KEY_WRONG_QUIZZES = 'KEY_WRONG_QUIZZES';
