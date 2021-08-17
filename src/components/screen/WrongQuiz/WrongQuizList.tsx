@@ -12,7 +12,9 @@ interface WrongQuizProps {
 }
 
 const WrongQuizList = ({ navigation }: WrongQuizProps) => {
-	const wrongQuizList = useSelector((state) => state.wrongQuiz.wrongQuizList?state.wrongQuiz.wrongQuizList:[]);
+	const wrongQuizList = useSelector((state) =>
+		state.wrongQuiz.wrongQuizList ? state.wrongQuiz.wrongQuizList : [],
+	);
 
 	console.log('wrongQuizList in WrongQuizList, ', wrongQuizList);
 
@@ -24,10 +26,12 @@ const WrongQuizList = ({ navigation }: WrongQuizProps) => {
 
 	return (
 		<FlatList
+			style={styles.flatList}
 			data={wrongQuizList}
-			keyExtractor={(item, index) => item.question}
-			renderItem={({ item }) => (
+			keyExtractor={(item) => item.question}
+			renderItem={({ item, index }) => (
 				<WrongQuizItem
+					index={index}
 					quizItem={item}
 					itemHeight={ITEM_HEIGHT}
 					onPress={(param: Quiz) => onPress(param)}
@@ -50,14 +54,18 @@ const WrongQuizList = ({ navigation }: WrongQuizProps) => {
 export default WrongQuizList;
 
 const styles = StyleSheet.create({
+	flatList: {
+		// paddingHorizontal: 16,
+	},
 	emptyComponent: {
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
 	},
-	separator: {
-		width: '100%',
-		height: 1,
-		backgroundColor: 'gray',
-	},
+	// separator: {
+	// 	width: '100%',
+	// 	height: 1,
+	// 	backgroundColor: 'gray',
+	// 	// Horizontal: -16,
+	// },
 });
