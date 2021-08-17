@@ -134,7 +134,7 @@ const Quiz = ({ navigation }: QuizProps) => {
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<SafeAreaView style={styles.container}>
-			<Header goBack={goBack} title="Quiz" goBackText="Go Back" />
+			<Header goBack={goBack} title="Quiz" goBackIcon="left" />
 			<SingleQuiz
 				currentQuiz={currentQuiz}
 				currentIndex={currentIndex}

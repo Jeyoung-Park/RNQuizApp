@@ -16,7 +16,7 @@ const WrongQuiz = ({ navigation }: WrongQuizProps) => {
 
 	return (
 		<SafeAreaView style={styles.container}>
-			<Header goBack={goBack} goBackText="Go Back" title="오답 노트" />
+			<Header goBack={goBack} goBackIcon="left" title="오답 노트" />
 			<WrongQuizList navigation={navigation} />
 		</SafeAreaView>
 	);

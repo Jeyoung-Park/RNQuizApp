@@ -166,7 +166,7 @@ const Result = ({ navigation, route }: ResultProps) => {
 	return (
 		// eslint-disable-next-line @typescript-eslint/no-use-before-define
 		<View style={styles.container}>
-			<Header title="Result" goBackText="Go Home" goBack={goBack} />
+			<Header title="Result" goBackIcon="home" goBack={goBack} />
 			<PieChart
 				data={data}
 				width={config.WINDOW_WIDTH}

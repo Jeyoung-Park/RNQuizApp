@@ -8,7 +8,7 @@ it('renders correctly', () => {
 		<Header
 			title="Quiz"
 			goBack={() => console.log('go Back')}
-			goBackText="Go Back"
+			goBackIcon="left"
 		/>,
 	);
 	expect(tree).toMatchSnapshot();
