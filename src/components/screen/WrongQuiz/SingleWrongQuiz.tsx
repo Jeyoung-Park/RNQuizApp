@@ -20,7 +20,7 @@ const SingleWrongQuiz = ({ navigation, route }: SingleWrongQuizProps) => {
 	return (
 		<View style={styles.container}>
 			{/* <Text>SingleWrongQuiz</Text> */}
-			<Header title="오답노트 상세" goBackText="Go Back" goBack={goBack} />
+			<Header title="오답노트 상세" goBackIcon="left" goBack={goBack} />
 			<View style={styles.singleQuizContainer}>
 				<SingleQuiz
 					currentQuiz={quizItem}
