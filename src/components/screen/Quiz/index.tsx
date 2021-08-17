@@ -19,6 +19,8 @@ import { createTwoButtonAlert } from '../../../shared/functions/Alert';
 import Header from '../../../shared/components/Header';
 import SingleQuiz from './SingleQuiz';
 
+import Icon from 'react-native-vector-icons/AntDesign';
+
 interface QuizProps {
 	navigation: any;
 }
@@ -146,7 +148,8 @@ const Quiz = ({ navigation }: QuizProps) => {
 			<View style={styles.buttonsContainer}>
 				{isSolved && (
 					<TouchableOpacity onPress={goToNext}>
-						<Text>Next</Text>
+						{/* <Text>Next</Text> */}
+						<Icon name="arrowright" size={24} color="black" />
 					</TouchableOpacity>
 				)}
 			</View>
