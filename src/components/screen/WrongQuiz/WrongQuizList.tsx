@@ -12,7 +12,7 @@ interface WrongQuizProps {
 }
 
 const WrongQuizList = ({ navigation }: WrongQuizProps) => {
-	const wrongQuizList = useSelector((state) => state.wrongQuiz.wrongQuizList);
+	const wrongQuizList = useSelector((state) => state.wrongQuiz.wrongQuizList?state.wrongQuiz.wrongQuizList:[]);
 
 	console.log('wrongQuizList in WrongQuizList, ', wrongQuizList);
 
@@ -35,7 +35,7 @@ const WrongQuizList = ({ navigation }: WrongQuizProps) => {
 			)}
 			ListEmptyComponent={() => <Text>오답이 없습니다.</Text>}
 			contentContainerStyle={
-				wrongQuizList.length === 0 && styles.emptyComponent
+				wrongQuizList?.length === 0 && styles.emptyComponent
 			}
 			// ItemSeparatorComponent={() => <View style={styles.separator} />}
 			getItemLayout={(data, index) => ({
