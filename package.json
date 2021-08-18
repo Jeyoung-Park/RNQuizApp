@@ -13,6 +13,7 @@
     "@react-native-async-storage/async-storage": "^1.15.6",
     "@react-navigation/native": "^6.0.1",
     "@react-navigation/native-stack": "^6.0.2",
+    "@testing-library/react-native": "^7.2.0",
     "@types/react-native-dotenv": "^0.2.0",
     "@types/react-native-vector-icons": "^6.4.8",
     "@types/redux-actions": "^2.6.2",
@@ -76,6 +77,9 @@
     },
     "transformIgnorePatterns": [
       "node_modules/(?!react-native|react-navigation)/"
+    ],
+    "setupFiles": [
+      "./jestSetupFile.js"
     ]
   }
 }

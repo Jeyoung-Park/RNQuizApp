@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import SimpleToast from 'react-native-simple-toast';
 import { useDispatch, useSelector } from 'react-redux';
+import Icon from 'react-native-vector-icons/AntDesign';
 import {
 	// getQuizListAction,
 	setQuizCorrectNumberAction,
@@ -19,10 +20,9 @@ import { createTwoButtonAlert } from '../../../shared/functions/Alert';
 import Header from '../../../shared/components/Header';
 import SingleQuiz from './SingleQuiz';
 
-import Icon from 'react-native-vector-icons/AntDesign';
-
 interface QuizProps {
-	navigation: any;
+	// eslint-disable-next-line react/require-default-props
+	navigation?: any;
 }
 
 const Quiz = ({ navigation }: QuizProps) => {

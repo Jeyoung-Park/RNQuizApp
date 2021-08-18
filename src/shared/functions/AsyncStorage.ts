@@ -27,9 +27,13 @@ export const getData = async ({ key, dispatch }: ReadDataProps) => {
 		const jsonValue = await AsyncStorage.getItem(key);
 		// console.log('jsonValue in getData, ', jsonValue);
 
-		dispatch(
-			setWrongQuizListAction(jsonValue != null ? JSON.parse(jsonValue) : null),
-		);
+		if (dispatch) {
+			dispatch(
+				setWrongQuizListAction(
+					jsonValue != null ? JSON.parse(jsonValue) : null,
+				),
+			);
+		}
 
 		// return jsonValue != null ? JSON.parse(jsonValue) : null;
 	} catch (e) {
