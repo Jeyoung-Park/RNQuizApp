@@ -17,7 +17,8 @@ const KEY_WRONG_QUIZZES = 'KEY_WRONG_QUIZZES';
 
 interface HomeProps {
 	// route:any,
-	navigation: any;
+	// eslint-disable-next-line react/require-default-props
+	navigation?: any;
 }
 
 const Home = ({ navigation }: HomeProps) => {

@@ -8,10 +8,10 @@ import renderer from 'react-test-renderer';
 import { NavigationContainer } from '@react-navigation/native';
 import { render, fireEvent } from '@testing-library/react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Provider } from 'react-redux';
 import App from '../src/App';
 import MainStackNavigator from '../src/components/navigation/MainStackNavigator';
 import { getData } from '../src/shared/functions/AsyncStorage';
-import { Provider } from 'react-redux';
 import store from '../src/store';
 // Note: test renderer must be required after react-native.
 // beforeAll(() => {
