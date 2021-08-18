@@ -61,6 +61,44 @@ it('check page contains proper elements', async () => {
 	expect(buttonWrongQuiz).toBeTruthy();
 });
 
+it('click navigation test_quiz', async () => {
+	const component = (
+		<Provider store={store}>
+			<NavigationContainer>
+				<MainStackNavigator />
+			</NavigationContainer>
+		</Provider>
+	);
+	const { findByText } = render(component);
+	const clickQuiz = await findByText('퀴즈 풀기');
+
+	fireEvent(clickQuiz, 'press');
+	const quizHeader = await findByText('Quiz');
+	const quizNumberText = await findByText('Q1');
+	const rightQuizNumberText = await findByText('0/10');
+
+	expect(quizHeader).toBeTruthy();
+	expect(quizNumberText).toBeTruthy();
+	expect(rightQuizNumberText).toBeTruthy();
+});
+
+// it('click navigation test_wrongQuiz', async () => {
+// 	const component = (
+// 		<Provider store={store}>
+// 			<NavigationContainer>
+// 				<MainStackNavigator />
+// 			</NavigationContainer>
+// 		</Provider>
+// 	);
+// 	const { findByText } = render(component);
+// 	const clickWrongQuiz = await findByText('오답 노트');
+
+// 	fireEvent(clickWrongQuiz, 'press');
+// 	const quizHeader = await findByText('오답 노트');
+
+// 	expect(quizHeader).toBeTruthy();
+// });
+
 // it('checks if Async Storage is used', async () => {
 // 	await asyncOperationOnAsyncStorage();
 
