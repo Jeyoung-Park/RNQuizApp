@@ -6,7 +6,8 @@ import Header from '../../../shared/components/Header';
 import WrongQuizList from './WrongQuizList';
 
 interface WrongQuizProps {
-	navigation: any;
+	// eslint-disable-next-line react/require-default-props
+	navigation?: any;
 }
 
 const WrongQuiz = ({ navigation }: WrongQuizProps) => {
