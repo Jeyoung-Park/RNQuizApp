@@ -20,7 +20,8 @@ import Header from '../../../shared/components/Header';
 const KEY_WRONG_QUIZZES = 'KEY_WRONG_QUIZZES';
 
 interface ResultProps {
-	navigation: any;
+	// eslint-disable-next-line react/require-default-props
+	navigation?: any;
 	route: any;
 }
 
