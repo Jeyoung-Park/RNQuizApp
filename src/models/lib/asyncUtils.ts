@@ -70,7 +70,7 @@ export const reducerUtils = {
 // type: 액션의 타입, key: 상태의 key
 export const handleAsyncActions = (type: any, key: any) => {
 	const [SUCCESS, ERROR] = [`${type}_SUCCESS`, `${type}_ERROR`];
-	return (state: any, action: { type: any; payload: any; paylod: any }) => {
+	return (state: any, action: any) => {
 		switch (action.type) {
 			case type:
 				return {
