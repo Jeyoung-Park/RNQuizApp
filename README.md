@@ -1,7 +1,5 @@
 # RNQuizApp
-react native를 이용한 퀴즈 앱입니다.
-
-
+react native를 이용한 퀴즈 앱입니다.  
 
 
 <!-- ![Screenshot_1628788552](https://user-images.githubusercontent.com/59302192/129240467-938c5e36-a0bb-42aa-b235-db27e105d731.png) -->
